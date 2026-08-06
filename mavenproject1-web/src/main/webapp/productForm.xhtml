@@ -15,9 +15,9 @@
             <p:growl id="growl" showDetail="true" />
 
             <p:inputText value="#{productBean.entity.productName}" required="true" requiredMessage="Field Cannot Be Empty"
-                         placeholder="Enter Product Name" />
+                         placeholder="Enter Product Name" /><br/>
             <p:inputText value="#{productBean.entity.productCode}" required="true" requiredMessage="Field Cannot Be Empty"
-                         placeholder="Enter Product Code" />
+                         placeholder="Enter Product Code" /><br/>
 
             <p:selectOneMenu value="#{productBean.entity.supplierId}" required="true" requiredMessage="Supplier Must Be Selected">
                 <f:selectItem itemLabel="-- Select Supplier --" itemValue="" />
@@ -25,22 +25,22 @@
                                var="supplier"
                                itemLabel="#{supplier.sname}"
                                itemValue="#{supplier.id}" />
-            </p:selectOneMenu>
+            </p:selectOneMenu><br/>
 
             <p:inputText value="#{productBean.entity.costPrice}" required="true" requiredMessage="Field Cannot Be Empty"
-                         placeholder="Enter Cost Price" />
+                         placeholder="Enter Cost Price" /><br/>
 
             <p:inputText value="#{productBean.entity.sellingPrice}" required="true" requiredMessage="Field Cannot Be Empty"
-                         placeholder="Enter Selling Price" />
+                         placeholder="Enter Selling Price" /><br/>
 
             <p:inputText value="#{productBean.entity.stockQuantity}" required="true" requiredMessage="Field Cannot Be Empty"
-                         placeholder="Enter Stock Quantity" />
+                         placeholder="Enter Stock Quantity" /><br/>
 
             <p:selectBooleanCheckbox value="#{productBean.entity.vatApplicable}" />
-            <h:outputLabel value="VAT Applicable" />
+            <h:outputLabel value="VAT Applicable" /><br/>
 
             <p:inputText value="#{productBean.entity.category}"
-                         placeholder="Enter Category" />
+                         placeholder="Enter Category" /><br/>
 
             <p:commandButton action="#{productBean.save()}" value="Submit" update="growl" ></p:commandButton>
         </h:form>
