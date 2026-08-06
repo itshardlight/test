@@ -9,10 +9,10 @@
     </h:head>
 
     <h:body>
-        <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
+        <p:growl id="growl" showDetail="true" />
 
+        <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
         <h:form>
-            <p:growl id="growl" showDetail="true" />
 
             <p:inputText value="#{productBean.entity.productName}" required="true" requiredMessage="Field Cannot Be Empty"
                          placeholder="Enter Product Name" /><br/>
@@ -46,7 +46,7 @@
                                itemLabel="#{category.cname}"
                                itemValue="#{category.id}" />
             </p:selectOneMenu><br/>
-           
+
 
             <p:commandButton action="#{productBean.save()}" value="Submit" update="growl" ></p:commandButton>
         </h:form>

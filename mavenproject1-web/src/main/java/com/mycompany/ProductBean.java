@@ -18,7 +18,7 @@ public class ProductBean {
     @EJB
     private ProductService service;
 
-    public String save() {
+    public void save() {
         try {
             service.save(entity);
             FacesContext.getCurrentInstance().addMessage(null,
@@ -32,7 +32,6 @@ public class ProductBean {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Error", e.getMessage()));
         }
-        return "productForm.xhtml?faces-redirect=true";
     }
 
     public List<ProductEntity> show() {
