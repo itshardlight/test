@@ -39,8 +39,14 @@
             <p:selectBooleanCheckbox value="#{productBean.entity.vatApplicable}" />
             <h:outputLabel value="VAT Applicable" /><br/>
 
-            <p:inputText value="#{productBean.entity.category}"
-                         placeholder="Enter Category" /><br/>
+            <p:selectOneMenu value="#{productBean.entity.categoryId}" required="true" requiredMessage="Supplier Must Be Selected">
+                <f:selectItem itemLabel="-- Select Supplier --" itemValue="" />
+                <f:selectItems value="#{categoryBean.show()}"
+                               var="category"
+                               itemLabel="#{category.cname}"
+                               itemValue="#{category.id}" />
+            </p:selectOneMenu><br/>
+           
 
             <p:commandButton action="#{productBean.save()}" value="Submit" update="growl" ></p:commandButton>
         </h:form>

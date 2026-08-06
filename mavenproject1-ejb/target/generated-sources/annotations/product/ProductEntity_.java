@@ -16,8 +16,8 @@ public abstract class ProductEntity_ {
 	public static volatile SingularAttribute<ProductEntity, BigDecimal> costPrice;
 	public static volatile SingularAttribute<ProductEntity, Integer> stockQuantity;
 	public static volatile SingularAttribute<ProductEntity, Long> id;
-	public static volatile SingularAttribute<ProductEntity, String> category;
 	public static volatile SingularAttribute<ProductEntity, String> productName;
+	public static volatile SingularAttribute<ProductEntity, Long> categoryId;
 
 }
 

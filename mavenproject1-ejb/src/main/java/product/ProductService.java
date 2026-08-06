@@ -19,7 +19,7 @@ public class ProductService {
         entity.setSellingPrice(test.getSellingPrice());
         entity.setStockQuantity(test.getStockQuantity());
         entity.setVatApplicable(test.getVatApplicable());
-        entity.setCategory(test.getCategory());
+        entity.setCategoryId(test.getCategoryId());
         entity.setProductCode(test.getProductCode());
         dao.save(entity);
     }

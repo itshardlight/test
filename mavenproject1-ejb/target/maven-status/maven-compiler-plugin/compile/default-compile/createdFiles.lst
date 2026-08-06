@@ -4,9 +4,12 @@ product\ProductEntity.class
 auth\UserEntity.class
 product\ProductService.class
 util\PasswordUtil.class
+category\CategoryDao.class
 supplier\SupplierDao.class
 auth\UserDao.class
 auth\UserService.class
+category\CategoryEntity_.class
+category\CategoryEntity.class
 auth\UserEntity_.class
 product\ProductEntity_.class
 product\ProductDao.class

@@ -1,4 +1,5 @@
 com\mycompany\ProductBean.class
 util\JacksonConfig.class
 com\mycompany\UserBean.class
+com\mycompany\CategoryBean.class
 com\mycompany\SupplierBean.class

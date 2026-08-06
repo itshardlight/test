@@ -52,8 +52,8 @@ public class ProductEntity implements Serializable {
     @Column(name = "vat_applicable")
     private Boolean vatApplicable;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "category_id")
+    private Long categoryId;
 
     //getter and setter 
     public String getProductCode() {
@@ -120,12 +120,14 @@ public class ProductEntity implements Serializable {
         this.vatApplicable = vatApplicable;
     }
 
-    public String getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
+
+   
 
 }
