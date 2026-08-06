@@ -19,7 +19,10 @@
             <p:inputText value="#{productBean.entity.productCode}" required="true" requiredMessage="Field Cannot Be Empty"
                          placeholder="Enter Product Code" /><br/>
 
-            <p:selectOneMenu value="#{productBean.entity.supplierId}" required="true" requiredMessage="Supplier Must Be Selected">
+            <p:selectOneMenu value="#{productBean.entity.supplierId}" required="true"
+                             requiredMessage="Supplier Must Be Selected" 
+                             filter="true"
+                             filterMatchMode="contains">
                 <f:selectItem itemLabel="-- Select Supplier --" itemValue="" />
                 <f:selectItems value="#{supplierBean.show()}"
                                var="supplier"
@@ -39,13 +42,22 @@
             <p:selectBooleanCheckbox value="#{productBean.entity.vatApplicable}" />
             <h:outputLabel value="VAT Applicable" /><br/>
 
-            <p:selectOneMenu value="#{productBean.entity.categoryId}" required="true" requiredMessage="Supplier Must Be Selected">
-                <f:selectItem itemLabel="-- Select Supplier --" itemValue="" />
+            <p:selectOneMenu 
+                value="#{productBean.entity.categoryId}" 
+                required="true" 
+                requiredMessage="Category Must Be Selected"
+                filter="true"
+                filterMatchMode="contains">
+
+                <f:selectItem itemLabel="-- Select Category --" itemValue="" />
+
                 <f:selectItems value="#{categoryBean.show()}"
                                var="category"
                                itemLabel="#{category.cname}"
                                itemValue="#{category.id}" />
-            </p:selectOneMenu><br/>
+
+            </p:selectOneMenu>
+            <br/>
 
 
             <p:commandButton action="#{productBean.save()}" value="Submit" update="growl" ></p:commandButton>

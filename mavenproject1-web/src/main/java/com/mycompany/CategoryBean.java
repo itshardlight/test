@@ -26,6 +26,11 @@ public class CategoryBean {
         return dao.show();
     }
     
+    public void remove(CategoryEntity entity){
+        dao.remove(entity);
+    }
+        
+    
     //getter and setter
 
     public CategoryDao getDao() {

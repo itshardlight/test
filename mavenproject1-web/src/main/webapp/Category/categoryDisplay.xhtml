@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>PrimeFaces Test</title>
+    </h:head>
+    <h:body>
+        <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
+        <h:form>
+            <div class="card">
+                <p:dataTable var="entity" value="#{categoryBean.show()}">
+
+                    <p:column headerText="Category Code">
+                        <h:outputText value="#{entity.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Category Name">
+                        <h:outputText value="#{entity.cname}" />
+                    </p:column>
+
+
+
+                    <p:column headerText="Action">
+                        <p:commandButton value="Delete" action="#{categoryBean.remove(entity)}" update="@form"></p:commandButton>
+                    </p:column>
+
+
+                </p:dataTable>
+            </div>
+        </h:form>
+
+    </h:body>
+
+</html>

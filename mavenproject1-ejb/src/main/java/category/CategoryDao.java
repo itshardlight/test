@@ -22,6 +22,9 @@ public class CategoryDao {
         return em.createQuery(query,CategoryEntity.class).getResultList();
     }
     
+    public void remove(CategoryEntity entity){
+        em.remove(em.merge(entity));
+    }
 
     
 }
