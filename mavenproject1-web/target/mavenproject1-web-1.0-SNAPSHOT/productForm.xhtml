@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Product Form</title>
@@ -18,8 +19,13 @@
             <p:inputText value="#{productBean.entity.productCode}" required="true" requiredMessage="Field Cannot Be Empty"
                          placeholder="Enter Product Code" />
 
-            <p:inputText value="#{productBean.entity.supplierId}" required="true" requiredMessage="Field Cannot Be Empty"
-                         placeholder="Enter Supplier ID" />
+            <p:selectOneMenu value="#{productBean.entity.supplierId}" required="true" requiredMessage="Supplier Must Be Selected">
+                <f:selectItem itemLabel="-- Select Supplier --" itemValue="" />
+                <f:selectItems value="#{supplierBean.show()}"
+                               var="supplier"
+                               itemLabel="#{supplier.sname}"
+                               itemValue="#{supplier.id}" />
+            </p:selectOneMenu>
 
             <p:inputText value="#{productBean.entity.costPrice}" required="true" requiredMessage="Field Cannot Be Empty"
                          placeholder="Enter Cost Price" />
@@ -36,7 +42,7 @@
             <p:inputText value="#{productBean.entity.category}"
                          placeholder="Enter Category" />
 
-            <p:commandButton action="#{productBean.save()}" value="Submit" update="growl"></p:commandButton>
+            <p:commandButton action="#{productBean.save()}" value="Submit" update="growl" ></p:commandButton>
         </h:form>
 
     </h:body>
