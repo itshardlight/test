@@ -28,6 +28,7 @@ public class SupplierDao {
     //removing the Supplier name
     public void remove(SupplierEntity entity) {
         em.remove(em.merge(entity));
+//        em.remove(entity);
     }
 
     //showing the Supplier list

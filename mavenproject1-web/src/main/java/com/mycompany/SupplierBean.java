@@ -25,8 +25,8 @@ public class SupplierBean {
      dao.add(entity);
     }
     
-    public void remove(SupplierEntity rEntity){
-        dao.remove(rEntity);
+    public void remove(SupplierEntity entity){
+        dao.remove(entity);
     }
     
     public void update(SupplierEntity entity){
