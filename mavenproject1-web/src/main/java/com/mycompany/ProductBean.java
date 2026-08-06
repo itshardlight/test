@@ -21,7 +21,12 @@ public class ProductBean {
     public void save() {
         try {
             service.save(entity);
-
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_INFO,
+                            "Success",
+                            "Product saved successfully."
+                    ));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
