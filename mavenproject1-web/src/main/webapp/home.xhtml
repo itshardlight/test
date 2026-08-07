@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      >
 
     <h:head>
         <title>Home</title>
@@ -12,9 +12,9 @@
 
         <p:outputLabel value="This is Home"></p:outputLabel>
         <br/>
-        <p:link value="Add Product" outcome="productForm.xhtml" />
+        <p:link value="Add Product" outcome="/Product/productForm.xhtml" />
         <br/>
-        <p:link value="View Product" outcome="productDisplay.xhtml" />
+        <p:link value="View Product" outcome="/Product/productDisplay.xhtml" />
         <br/>
         <p:link value="Add Supplier" outcome="/Supplier/supplierForm" />
         <br/>
@@ -23,6 +23,8 @@
         <p:link value="Add Category" outcome="/Category/categoryForm.xhtml" />
         <br/>
         <p:link value="View Category" outcome="/Category/categoryDisplay.xhtml" />
+        <br/>
+        <p:link value="Make Purchase" outcome="/Purchase/purchaseForm.xhtml" />
     </h:body>
 
 </html>

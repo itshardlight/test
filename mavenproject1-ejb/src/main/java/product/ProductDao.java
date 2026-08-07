@@ -34,12 +34,6 @@ public class ProductDao {
         String query = "SELECT e FROM ProductEntity e";
                 return em.createQuery(query,ProductEntity.class).getResultList();
     }
-    
-    // show low stock product 
-    public List<ProductEntity> getlowStock(Integer stock){
-        String query = "SELECT e from ProductEntity e where e.stock_quantity <=:stock";
-        return em.createQuery(query, ProductEntity.class).setParameter("stock",stock).getResultList();
-    }
-    
+  
     
 }
