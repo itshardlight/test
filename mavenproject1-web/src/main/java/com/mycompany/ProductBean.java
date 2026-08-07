@@ -6,21 +6,21 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import product.ProductDao;
 import product.ProductEntity;
-import product.ProductService;
 
 @ManagedBean(name = "productBean")
 @ViewScoped
 public class ProductBean {
 
-    private ProductEntity entity = new ProductEntity();
+    ProductEntity entity = new ProductEntity();
 
     @EJB
-    private ProductService service;
+    private ProductDao dao;
 
     public void save() {
         try {
-            service.save(entity);
+            dao.save(entity);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(
                             FacesMessage.SEVERITY_INFO,
@@ -35,15 +35,17 @@ public class ProductBean {
     }
 
     public List<ProductEntity> show() {
-        return service.show();
+        return dao.show();
     }
 
-    public void delProduct(ProductEntity product) {
+    public void delProduct(ProductEntity entity) {
 
-        service.deletebyId(product.getProductCode());
+        dao.deletebyId(entity);
     }
 
-    //getter and setter
+    
+    //getter and setter 
+
     public ProductEntity getEntity() {
         return entity;
     }
@@ -52,4 +54,12 @@ public class ProductBean {
         this.entity = entity;
     }
 
+    public ProductDao getDao() {
+        return dao;
+    }
+
+    public void setDao(ProductDao dao) {
+        this.dao = dao;
+    }
+     
 }

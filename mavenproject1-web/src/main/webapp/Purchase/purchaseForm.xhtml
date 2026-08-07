@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>PrimeFaces Test</title>
+    </h:head>
+
+    <h:body>
+        <p:growl id="growl" showDetail="true" />
+
+        <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
+        <h:form>
+            <p:selectOneMenu value="#{purchaseBean.entity.supplierId}" required="true"
+                             requiredMessage="Supplier Must Be Selected" 
+                             filter="true"
+                             filterMatchMode="contains">
+                <f:selectItem itemLabel="-- Select Supplier --" itemValue="" />
+                <f:selectItems value="#{supplierBean.show()}"
+                               var="supplier"
+                               itemLabel="#{supplier.sname}"
+                               itemValue="#{supplier.id}" />
+            </p:selectOneMenu><br/>
+
+            <p:selectOneMenu value="#{purchaseBean.entity.productId}" required="true"
+                             requiredMessage="Product Must Be Selected" 
+                             filter="true"
+                             filterMatchMode="contains">
+                <f:selectItem itemLabel="-- Select Product --" itemValue="" />
+                <f:selectItems value="#{productBean.show()}"
+                               var="product"
+                               itemLabel="#{product.productName}"
+                               itemValue="#{product.id}" />
+            </p:selectOneMenu><br/>
+
+            <p:inputText value="#{purchaseBean.entity.costPrice}" placeholder="Enter Cost Price" required="true" requiredMessage="Field Cannot be Empty"></p:inputText>
+            <p:inputText value="#{purchaseBean.entity.sellingPrice}" placeholder="Enter Selling Price" required="true" requiredMessage="Field Cannot be Empty"></p:inputText>
+            <p:inputText value="#{purchaseBean.entity.stockQuantity}" placeholder="Enter Stock" required="true" requiredMessage="Field Cannot be Empty"></p:inputText>
+            <p:commandButton value="Submit" action="#{purchaseBean.save}" update="growl"></p:commandButton>
+        </h:form>
+
+    </h:body>
+
+</html>

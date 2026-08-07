@@ -28,42 +28,13 @@ public class ProductEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "product_code", nullable = false, unique = true)
-    private String productCode;
-
     @Column(name = "product_name", nullable = false)
     private String productName;
-
-    @Column(name = "supplier_id")
-    private Long supplierId;
-
-    @PositiveOrZero(message = "Cost Price cannot be negative")
-    @Column(name = "cost_price", nullable = false)
-    private BigDecimal costPrice;
-
-    @PositiveOrZero(message = "Selling Price cannot be negative")
-    @Column(name = "selling_price", nullable = false)
-    private BigDecimal sellingPrice;
-
-    @PositiveOrZero(message = "Stock cannot be negative")
-    @Column(name = "stock_quantity", nullable = false)
-    private Integer stockQuantity;
-
-    @Column(name = "vat_applicable")
-    private Boolean vatApplicable;
 
     @Column(name = "category_id")
     private Long categoryId;
 
     //getter and setter 
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
     public Long getId() {
         return id;
     }
@@ -80,46 +51,6 @@ public class ProductEntity implements Serializable {
         this.productName = productName;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    public BigDecimal getCostPrice() {
-        return costPrice;
-    }
-
-    public void setCostPrice(BigDecimal costPrice) {
-        this.costPrice = costPrice;
-    }
-
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
-    public Integer getStockQuantity() {
-        return stockQuantity;
-    }
-
-    public void setStockQuantity(Integer stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
-
-    public Boolean getVatApplicable() {
-        return vatApplicable;
-    }
-
-    public void setVatApplicable(Boolean vatApplicable) {
-        this.vatApplicable = vatApplicable;
-    }
-
     public Long getCategoryId() {
         return categoryId;
     }
@@ -127,7 +58,5 @@ public class ProductEntity implements Serializable {
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
-
-   
 
 }
