@@ -24,20 +24,44 @@
                                itemValue="#{supplier.id}" />
             </p:selectOneMenu><br/>
 
-            <p:selectOneMenu value="#{purchaseBean.entity.productId}" required="true"
-                             requiredMessage="Product Must Be Selected" 
-                             filter="true"
-                             filterMatchMode="contains">
-                <f:selectItem itemLabel="-- Select Product --" itemValue="" />
-                <f:selectItems value="#{productBean.show()}"
-                               var="product"
-                               itemLabel="#{product.productName}"
-                               itemValue="#{product.id}" />
-            </p:selectOneMenu><br/>
+            <p:dataTable value="#{purchaseBean.entity}" var="item">
 
-            <p:inputText value="#{purchaseBean.entity.costPrice}" placeholder="Enter Cost Price" required="true" requiredMessage="Field Cannot be Empty"></p:inputText>
-            <p:inputText value="#{purchaseBean.entity.sellingPrice}" placeholder="Enter Selling Price" required="true" requiredMessage="Field Cannot be Empty"></p:inputText>
-            <p:inputText value="#{purchaseBean.entity.stockQuantity}" placeholder="Enter Stock" required="true" requiredMessage="Field Cannot be Empty"></p:inputText>
+                <p:column headerText="Product">
+                    <p:selectOneMenu value="#{item.productId}"
+                                     required="true"
+                                     requiredMessage="Product Must Be Selected"
+                                     filter="true"
+                                     filterMatchMode="contains">
+                        <f:selectItem itemLabel="-- Select Product --" itemValue="" />
+                        <f:selectItems value="#{productBean.show()}"
+                                       var="product"
+                                       itemLabel="#{product.productName}"
+                                       itemValue="#{product.id}" />
+                    </p:selectOneMenu>
+                </p:column>
+
+                <p:column headerText="Cost Price">
+                    <p:inputText value="#{item.costPrice}"
+                                 placeholder="Enter Cost Price"
+                                 required="true"
+                                 requiredMessage="Field Cannot be Empty"/>
+                </p:column>
+
+                <p:column headerText="Selling Price">
+                    <p:inputText value="#{item.sellingPrice}"
+                                 placeholder="Enter Selling Price"
+                                 required="true"
+                                 requiredMessage="Field Cannot be Empty"/>
+                </p:column>
+
+                <p:column headerText="Stock">
+                    <p:inputText value="#{item.stockQuantity}"
+                                 placeholder="Enter Stock"
+                                 required="true"
+                                 requiredMessage="Field Cannot be Empty"/>
+                </p:column>
+
+            </p:dataTable>
             <p:commandButton value="Submit" action="#{purchaseBean.save}" update="growl"></p:commandButton>
         </h:form>
 
