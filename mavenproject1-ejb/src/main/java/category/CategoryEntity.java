@@ -17,7 +17,7 @@ public class CategoryEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name",nullable=false)
     private String cname;
 
     //getter and setter
