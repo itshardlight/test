@@ -7,8 +7,10 @@ package com.mycompany;
 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import supplier.SupplierDao;
 import supplier.SupplierEntity;
 
@@ -22,7 +24,19 @@ public class SupplierBean {
     SupplierEntity entity =new SupplierEntity();
     
     public void add(){
-     dao.add(entity);
+         try {
+            dao.add(entity);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_INFO,
+                            "Success",
+                            "Supplier saved successfully."
+                    ));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error", e.getMessage()));
+        }
     }
     
     public void remove(SupplierEntity entity){

@@ -2,8 +2,10 @@ package com.mycompany;
 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import purchase.PurchaseDao;
 import purchase.PurchaseEntity;
 
@@ -17,7 +19,19 @@ public class PurchaseBean {
     private PurchaseEntity entity = new PurchaseEntity();
 
     public void save() {
-        dao.save(entity);
+            try {
+            dao.save(entity);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_INFO,
+                            "Success",
+                            "Product purchased successfully."
+                    ));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error", e.getMessage()));
+        }
     }
 
     public void del(PurchaseEntity entity) {
