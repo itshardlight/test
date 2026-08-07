@@ -12,16 +12,8 @@ public class ProductService {
 
     // saving in data base
     public void save(ProductEntity test) throws Exception{
-        ProductEntity entity = new ProductEntity();
-        entity.setProductName(test.getProductName());
-        entity.setSupplierId(test.getSupplierId());
-        entity.setCostPrice(test.getCostPrice());
-        entity.setSellingPrice(test.getSellingPrice());
-        entity.setStockQuantity(test.getStockQuantity());
-        entity.setVatApplicable(test.getVatApplicable());
-        entity.setCategoryId(test.getCategoryId());
-        entity.setProductCode(test.getProductCode());
-        dao.save(entity);
+     
+        dao.save(test);
     }
 
     // find by product code
