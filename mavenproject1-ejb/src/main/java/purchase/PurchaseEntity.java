@@ -19,18 +19,18 @@ public class PurchaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "product_id")
+    @Column(name = "product_id",nullable=false)
     private Long productId;
 
-    @Column(name = "supplier_id")
+    @Column(name = "supplier_id",nullable=false)
     private Long supplierId;
 
     @PositiveOrZero(message = "Cost Price cannot be negative")
-    @Column(name = "cost_price")
+    @Column(name = "cost_price",nullable=false)
     private BigDecimal costPrice;
 
     @PositiveOrZero(message = "Selling Price cannot be negative")
-    @Column(name = "selling_price")
+    @Column(name = "selling_price",nullable=false)
     private BigDecimal sellingPrice;
 
     @PositiveOrZero(message = "Stock cannot be negative")

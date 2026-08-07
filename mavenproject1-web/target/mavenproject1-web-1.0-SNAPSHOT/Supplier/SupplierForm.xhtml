@@ -4,18 +4,19 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>SupplierForm</title>
+        <title>Supplier Form</title>
     </h:head>
 
     <h:body>
-<p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();"/>
+        <p:growl id="growl" showDetail="true" />
+        <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();"/>
         <h:form>
 
-            <p:inputText placeholder="Enter your name" value="#{supplierBean.entity.sname}" />
+            <p:inputText placeholder="Enter Supplier Name" value="#{supplierBean.entity.sname}" required="true" requiredMessage="Field Cannot Be Empty" />
 
             <br/><br/>
 
-            <p:commandButton value="Submit" action="#{supplierBean.add()}" update="@form"/>
+            <p:commandButton value="Submit" action="#{supplierBean.add()}" update="@form growl"/>
 
         </h:form>
 

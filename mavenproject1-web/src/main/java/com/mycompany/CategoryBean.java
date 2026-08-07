@@ -5,8 +5,10 @@ import category.CategoryDao;
 import category.CategoryEntity;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name="categoryBean")
 @ViewScoped
@@ -17,9 +19,20 @@ public class CategoryBean {
     
     public CategoryEntity entity = new CategoryEntity();
     
-    public String save(){
-        dao.save(entity);
-        return "categoryForm.xhtml?faces-redirect=true";
+    public void save(){
+         try {
+            dao.save(entity);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_INFO,
+                            "Success",
+                            "Category saved successfully."
+                    ));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error", e.getMessage()));
+        }
     }
     
     public List<CategoryEntity> show(){
