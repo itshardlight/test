@@ -43,6 +43,7 @@ public class PurchaseBean {
         try {
             for (PurchaseEntity item : items) {
                 item.setSupplierId(entity.getSupplierId());
+                item.setDate(entity.getDate());
                 dao.save(item);
             }
 

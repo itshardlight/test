@@ -3,6 +3,7 @@ package purchase;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,9 +37,20 @@ public class PurchaseEntity implements Serializable {
     @PositiveOrZero(message = "Stock cannot be negative")
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
+    
+    @Column(name="purchase_date",nullable=false)
+    private Date date;
 
     
     //getter and setter
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Long getId() {
         return id;
