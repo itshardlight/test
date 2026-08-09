@@ -1,9 +1,12 @@
 package com.mycompany;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import purchase.PurchaseDao;
@@ -17,10 +20,32 @@ public class PurchaseBean {
     private PurchaseDao dao;
 
     private PurchaseEntity entity = new PurchaseEntity();
+    List<PurchaseEntity> items = new ArrayList<>();
+
+    @PostConstruct
+    public void init() {
+        items.add(new PurchaseEntity()); // first row
+    }
+
+    public void addRow() {
+        items.add(new PurchaseEntity());
+    }
+
+    public void removeRow(PurchaseEntity item) {
+        items.remove(item);
+    }
+
+    public List<PurchaseEntity> getItems() {
+        return items;
+    }
 
     public void save() {
-            try {
-            dao.save(entity);
+        try {
+            for (PurchaseEntity item : items) {
+                item.setSupplierId(entity.getSupplierId());
+                dao.save(item);
+            }
+
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(
                             FacesMessage.SEVERITY_INFO,
