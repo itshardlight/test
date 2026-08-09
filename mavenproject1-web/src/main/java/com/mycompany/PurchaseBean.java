@@ -13,7 +13,7 @@ import purchase.PurchaseDao;
 import purchase.PurchaseEntity;
 
 @ManagedBean(name = "purchaseBean")
-@SessionScoped
+@ViewScoped
 public class PurchaseBean {
 
     @EJB
@@ -41,7 +41,11 @@ public class PurchaseBean {
 
     public void save() {
         try {
-            dao.save(entity);
+            for (PurchaseEntity item : items) {
+                item.setSupplierId(entity.getSupplierId());
+                dao.save(item);
+            }
+
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(
                             FacesMessage.SEVERITY_INFO,
@@ -64,9 +68,6 @@ public class PurchaseBean {
     }
 
     //getter and setter
-    
-    
-    
     public PurchaseDao getDao() {
         return dao;
     }

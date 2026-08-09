@@ -63,7 +63,6 @@
                 <p:column>
                       <p:commandButton value="Remove"
                                action="#{purchaseBean.removeRow(item)}"
-                             process="@this"
                              update="itemTable"/><br/>
                 </p:column>
 
@@ -71,7 +70,6 @@
 
             <p:commandButton value="Add"
                              action="#{purchaseBean.addRow}"
-                             process="@this"
                              update="itemTable"/><br/>
             
             <p:commandButton value="Submit" action="#{purchaseBean.save}" update="growl"></p:commandButton>
