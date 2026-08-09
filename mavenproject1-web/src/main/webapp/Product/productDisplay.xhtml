@@ -12,9 +12,13 @@
 
         <h:form>
             <div class="card">
-                <p:dataTable var="product" value="#{productBean.show()}">
+                <p:dataTable var="product"
+                             value="#{productBean.show()}"
+                             paginator="true"
+                             rows="7"
+                             paginatorPosition="bottom">
 
-                    <p:column headerText="Product Code">
+                    <p:column headerText="Product Code" style="width: 10%">
                         <h:outputText value="#{product.id}"/>
                     </p:column>
 
@@ -23,10 +27,10 @@
                     </p:column>
 
                     <p:column headerText="Category">
-                        <h:outputText value="#{product.categoryId}" />
+                        <h:outputText value="#{categoryBean.getCategoryName(product.categoryId)}" />
                     </p:column>
 
-                   
+
                     <p:column headerText="Action">
                         <p:commandButton value="Delete" action="#{productBean.delProduct(product)}" update="@form"></p:commandButton>
                     </p:column>

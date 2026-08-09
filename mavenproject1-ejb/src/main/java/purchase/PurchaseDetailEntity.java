@@ -25,10 +25,12 @@ public class PurchaseDetailEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "purchase_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "purchase_id")
+    private Long purchaseId;
+    
     @Column(name = "product_id", nullable = false)
     private Long productId;
 
@@ -47,6 +49,16 @@ public class PurchaseDetailEntity implements Serializable {
     
     //getter and setter 
 
+    public Long getPurchaseId() {
+        return purchaseId;
+    }
+
+    public void setPurchaseId(Long purchaseId) {
+        this.purchaseId = purchaseId;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }

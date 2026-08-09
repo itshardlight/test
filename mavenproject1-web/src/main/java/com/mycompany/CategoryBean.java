@@ -34,6 +34,9 @@ public class CategoryBean {
                             "Error", e.getMessage()));
         }
     }
+    public String getCategoryName(Long categoryId){
+        return dao.getCategoryName(categoryId);
+    }
     
     public List<CategoryEntity> show(){
         return dao.show();

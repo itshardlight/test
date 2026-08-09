@@ -16,13 +16,13 @@ public class ProductDao {
         em.persist(entity);
     }
 
-    // get product by id
-    public ProductEntity findById(String code) {
-        String query = "SELECT a FROM ProductEntity a WHERE a.productCode = :code";
-        return em.createQuery(query, ProductEntity.class)
-                .setParameter("code", code)
-                .getSingleResult();
-    }
+    public String findById(Long code) {
+    String query = "SELECT a.productName FROM ProductEntity a WHERE a.id = :id";
+
+    return em.createQuery(query, String.class)
+            .setParameter("id", code)
+            .getSingleResult();
+}
 
     // delete product by id
     public void deletebyId(ProductEntity entity){

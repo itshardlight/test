@@ -1,11 +1,9 @@
-
 package supplier;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 
 @Stateless
 public class SupplierDao {
@@ -35,5 +33,11 @@ public class SupplierDao {
         em.merge(newEntity);
         em.getTransaction().commit();
     }
-
+//get supplier name
+    public String getSupplierName(Long supplierId) {
+        String query = "SELECT e.sname FROM SupplierEntity e WHERE e.id = :id";
+        return em.createQuery(query, String.class)
+                .setParameter("id", supplierId)
+                .getSingleResult();
+    }
 }

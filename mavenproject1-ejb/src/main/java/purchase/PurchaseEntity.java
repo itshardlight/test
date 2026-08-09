@@ -35,7 +35,10 @@ public class PurchaseEntity implements Serializable {
     @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice;
 
+   
+
     //getter and setter
+  
 
     public Long getId() {
         return id;
@@ -68,6 +71,5 @@ public class PurchaseEntity implements Serializable {
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
-    
-    
+
 }
