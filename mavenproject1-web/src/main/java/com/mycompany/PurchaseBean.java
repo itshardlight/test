@@ -1,12 +1,12 @@
 package com.mycompany;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import purchase.PurchaseDao;
@@ -39,11 +39,30 @@ public class PurchaseBean {
         return items;
     }
 
+    public void calculateTotal() {
+
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (PurchaseEntity item : items) {
+
+            if (item.getCostPrice() != null && item.getStockQuantity() != null) {
+
+                BigDecimal rowTotal = item.getCostPrice()
+                        .multiply(BigDecimal.valueOf(item.getStockQuantity()));
+
+                total = total.add(rowTotal);
+            }
+        }
+
+        entity.setTotalPrice(total);
+    }
+
     public void save() {
         try {
             for (PurchaseEntity item : items) {
                 item.setSupplierId(entity.getSupplierId());
                 item.setDate(entity.getDate());
+                item.setTotalPrice(entity.getTotalPrice());
                 dao.save(item);
             }
 

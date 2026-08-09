@@ -12,7 +12,7 @@
         <p:growl id="growl" showDetail="true" />
 
         <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
-        <h:form>
+        <h:form id="purchaseForm">
             <p:datePicker id="date"
                           value="#{purchaseBean.entity.date}"
                           pattern="yyyy-MM-dd" 
@@ -51,7 +51,11 @@
                     <p:inputText value="#{item.costPrice}"
                                  placeholder="Enter Cost Price"
                                  required="true"
-                                 requiredMessage="Field Cannot be Empty"/>
+                                 requiredMessage="Field Cannot be Empty">
+                        <p:ajax event="change"
+                                listener="#{purchaseBean.calculateTotal}"
+                                update=":purchaseForm:totalPanel"/>
+                    </p:inputText>
                 </p:column>
 
                 <p:column headerText="Selling Price">
@@ -65,7 +69,10 @@
                     <p:inputText value="#{item.stockQuantity}"
                                  placeholder="Enter Stock"
                                  required="true"
-                                 requiredMessage="Field Cannot be Empty"/>
+                                 requiredMessage="Field Cannot be Empty">
+                        <p:ajax event="change"
+                                listener="#{purchaseBean.calculateTotal}"
+                                update=":purchaseForm:totalPanel"/></p:inputText>
                 </p:column>
                 <p:column>
                     <p:commandButton value="Remove" immediate="true"
@@ -74,7 +81,12 @@
                 </p:column>
 
             </p:dataTable>
+            <h:panelGroup id="totalPanel">
 
+                Total:
+                <h:outputText value="#{purchaseBean.entity.totalPrice}" />
+
+            </h:panelGroup><br/>
             <p:commandButton value="Add" 
                              action="#{purchaseBean.addRow}"
                              update="itemTable"/><br/>
