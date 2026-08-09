@@ -10,11 +10,31 @@
     <h:body>
         <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
         <h:form>
-            <p:inputText placeholder="Enter your name" />
+            <p:dataTable id="dataTable"
+                         value="#{purchaseBean.dao.showPurchase()}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         paginatorPosition="bottom"
+                        >
 
-            <br/><br/>
+                <p:column headerText="ID">
+                    <h:outputText value="#{item.id}" />
+                </p:column>
 
-            <p:commandButton value="Submit" />
+                <p:column headerText="Date">
+                    <h:outputText value="#{item.date}" />
+                </p:column>
+
+                <p:column headerText="Supplier Name">
+                    <h:outputText value="#{supplierBean.dao.getSupplierName(item.supplierId)}" />
+                </p:column>
+
+                <p:column headerText="Total Amount">
+                    <h:outputText value="#{item.totalPrice}" />
+                </p:column>
+
+            </p:dataTable>
 
         </h:form>
 

@@ -23,9 +23,9 @@ public class PurchaseDao {
     public void save(PurchaseEntity entity1, List<PurchaseDetailEntity> entity2) {
         em.persist(entity1);
         for (PurchaseDetailEntity item : entity2) {
-                    item.setPurchaseId(entity1.getId());
-                    em.persist(item);
-            }
+            item.setPurchaseId(entity1.getId());
+            em.persist(item);
+        }
     }
 
     public void remove(PurchaseEntity entity1, PurchaseDetailEntity entity2) {
@@ -34,6 +34,9 @@ public class PurchaseDao {
 
     }
 
- 
+    public List<PurchaseEntity> showPurchase() {
+        String query = "SELECT e FROM PurchaseEntity e";
+        return em.createQuery(query, PurchaseEntity.class).getResultList();
+    }
 
 }
