@@ -1,6 +1,8 @@
 purchase\PurchaseEntity.class
 supplier\SupplierEntity_.class
+purchase\PurchaseDetailEntity_.class
 supplier\SupplierEntity.class
+purchase\PurchaseDetailEntity.class
 product\ProductEntity.class
 auth\UserEntity.class
 util\PasswordUtil.class

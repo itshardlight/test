@@ -3,41 +3,38 @@ package purchase;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "purchase_table")
 public class PurchaseEntity implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
+    @Column(name = "purchase_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "product_id",nullable=false)
-    private Long productId;
-
-    @Column(name = "supplier_id",nullable=false)
+    @Column(name = "supplier_id", nullable = false)
     private Long supplierId;
 
-    @PositiveOrZero(message = "Cost Price cannot be negative")
-    @Column(name = "cost_price",nullable=false)
-    private BigDecimal costPrice;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "purchase_date", nullable = false)
+    private Date date;
 
-    @PositiveOrZero(message = "Selling Price cannot be negative")
-    @Column(name = "selling_price",nullable=false)
-    private BigDecimal sellingPrice;
+    @PositiveOrZero(message = "Total Price cannot be negative")
+    @Column(name = "total_price", nullable = false)
+    private BigDecimal totalPrice;
 
-    @PositiveOrZero(message = "Stock cannot be negative")
-    @Column(name = "stock_quantity", nullable = false)
-    private Integer stockQuantity;
-
-    
     //getter and setter
 
     public Long getId() {
@@ -48,14 +45,6 @@ public class PurchaseEntity implements Serializable {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
     public Long getSupplierId() {
         return supplierId;
     }
@@ -64,28 +53,21 @@ public class PurchaseEntity implements Serializable {
         this.supplierId = supplierId;
     }
 
-    public BigDecimal getCostPrice() {
-        return costPrice;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCostPrice(BigDecimal costPrice) {
-        this.costPrice = costPrice;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
-
-    public Integer getStockQuantity() {
-        return stockQuantity;
-    }
-
-    public void setStockQuantity(Integer stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
+    
     
 }

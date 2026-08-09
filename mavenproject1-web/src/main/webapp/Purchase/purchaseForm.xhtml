@@ -12,8 +12,15 @@
         <p:growl id="growl" showDetail="true" />
 
         <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
-        <h:form>
-            <p:selectOneMenu value="#{purchaseBean.entity.supplierId}" required="true"
+        <h:form id="purchaseForm">
+            <p:datePicker id="date"
+                          value="#{purchaseBean.entity1.date}"
+                          pattern="yyyy-MM-dd" 
+                          showIcon="true"
+                          showButtonBar="true"
+                          inputStyle="width: 150px;"
+                          /><br/>
+            <p:selectOneMenu value="#{purchaseBean.entity1.supplierId}" required="true"
                              requiredMessage="Supplier Must Be Selected" 
                              filter="true"
                              filterMatchMode="contains">
@@ -22,11 +29,11 @@
                                var="supplier"
                                itemLabel="#{supplier.sname}"
                                itemValue="#{supplier.id}" />
-            </p:selectOneMenu><br/>
+            </p:selectOneMenu>
 
-            <p:dataTable id="itemTable" value="#{purchaseBean.items}" var="item">
+            <p:dataTable id="itemTable" value="#{purchaseBean.items2}" var="item">
 
-                <p:column headerText="Product">
+                <p:column headerText="Product" style="width: 25%">
                     <p:selectOneMenu value="#{item.productId}"
                                      required="true"
                                      requiredMessage="Product Must Be Selected"
@@ -44,7 +51,11 @@
                     <p:inputText value="#{item.costPrice}"
                                  placeholder="Enter Cost Price"
                                  required="true"
-                                 requiredMessage="Field Cannot be Empty"/>
+                                 requiredMessage="Field Cannot be Empty">
+                        <p:ajax event="change"
+                                listener="#{purchaseBean.calculateTotal}"
+                                update=":purchaseForm:totalPanel"/>
+                    </p:inputText>
                 </p:column>
 
                 <p:column headerText="Selling Price">
@@ -58,20 +69,28 @@
                     <p:inputText value="#{item.stockQuantity}"
                                  placeholder="Enter Stock"
                                  required="true"
-                                 requiredMessage="Field Cannot be Empty"/>
+                                 requiredMessage="Field Cannot be Empty">
+                        <p:ajax event="change"
+                                listener="#{purchaseBean.calculateTotal}"
+                                update=":purchaseForm:totalPanel"/></p:inputText>
                 </p:column>
                 <p:column>
                     <p:commandButton value="Remove" immediate="true"
-                               action="#{purchaseBean.removeRow(item)}"
-                             update="itemTable"/><br/>
+                                     action="#{purchaseBean.removeRow(item)}"
+                                     update="itemTable"/><br/>
                 </p:column>
 
             </p:dataTable>
+            <h:panelGroup id="totalPanel">
 
+                Total:
+                <h:outputText value="#{purchaseBean.entity1.totalPrice}" />
+
+            </h:panelGroup><br/>
             <p:commandButton value="Add" 
                              action="#{purchaseBean.addRow}"
                              update="itemTable"/><br/>
-            
+
             <p:commandButton value="Submit" action="#{purchaseBean.save}" update="growl"></p:commandButton>
         </h:form>
 
