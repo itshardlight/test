@@ -61,14 +61,14 @@
                                  requiredMessage="Field Cannot be Empty"/>
                 </p:column>
                 <p:column>
-                      <p:commandButton value="Remove"
+                    <p:commandButton value="Remove" immediate="true"
                                action="#{purchaseBean.removeRow(item)}"
                              update="itemTable"/><br/>
                 </p:column>
 
             </p:dataTable>
 
-            <p:commandButton value="Add"
+            <p:commandButton value="Add" 
                              action="#{purchaseBean.addRow}"
                              update="itemTable"/><br/>
             
