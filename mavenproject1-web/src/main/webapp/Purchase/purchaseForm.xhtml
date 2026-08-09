@@ -24,7 +24,7 @@
                                itemValue="#{supplier.id}" />
             </p:selectOneMenu><br/>
 
-            <p:dataTable value="#{purchaseBean.entity}" var="item">
+            <p:dataTable id="itemTable" value="#{purchaseBean.items}" var="item">
 
                 <p:column headerText="Product">
                     <p:selectOneMenu value="#{item.productId}"
@@ -60,8 +60,20 @@
                                  required="true"
                                  requiredMessage="Field Cannot be Empty"/>
                 </p:column>
+                <p:column>
+                      <p:commandButton value="Remove"
+                               action="#{purchaseBean.removeRow(item)}"
+                             process="@this"
+                             update="itemTable"/><br/>
+                </p:column>
 
             </p:dataTable>
+
+            <p:commandButton value="Add"
+                             action="#{purchaseBean.addRow}"
+                             process="@this"
+                             update="itemTable"/><br/>
+            
             <p:commandButton value="Submit" action="#{purchaseBean.save}" update="growl"></p:commandButton>
         </h:form>
 
