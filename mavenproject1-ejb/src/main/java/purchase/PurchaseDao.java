@@ -16,19 +16,23 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PurchaseDao {
-    
+
     @PersistenceContext
     private EntityManager em;
-    
-    public void save(PurchaseEntity entity){
-        em.persist(entity);
+
+    public void save(PurchaseEntity entity1, List<PurchaseDetailEntity> entity2) {
+        em.persist(entity1);
+        for (PurchaseDetailEntity item : entity2) {
+                    em.persist(item);
+            }
     }
-    public void remove(PurchaseEntity entity){
-        em.remove(entity);
+
+    public void remove(PurchaseEntity entity1, PurchaseDetailEntity entity2) {
+        em.remove(entity1);
+        em.remove(entity2);
+
     }
-    public List<PurchaseEntity> show(){
-        String query = "SELECT e FROM PurchaseEntity e";
-        return em.createQuery(query,PurchaseEntity.class).getResultList();
-    }
-    
+
+ 
+
 }

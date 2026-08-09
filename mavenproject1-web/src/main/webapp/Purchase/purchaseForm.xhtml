@@ -14,13 +14,13 @@
         <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
         <h:form id="purchaseForm">
             <p:datePicker id="date"
-                          value="#{purchaseBean.entity.date}"
+                          value="#{purchaseBean.entity1.date}"
                           pattern="yyyy-MM-dd" 
                           showIcon="true"
                           showButtonBar="true"
                           inputStyle="width: 150px;"
                           /><br/>
-            <p:selectOneMenu value="#{purchaseBean.entity.supplierId}" required="true"
+            <p:selectOneMenu value="#{purchaseBean.entity1.supplierId}" required="true"
                              requiredMessage="Supplier Must Be Selected" 
                              filter="true"
                              filterMatchMode="contains">
@@ -31,7 +31,7 @@
                                itemValue="#{supplier.id}" />
             </p:selectOneMenu>
 
-            <p:dataTable id="itemTable" value="#{purchaseBean.items}" var="item">
+            <p:dataTable id="itemTable" value="#{purchaseBean.items2}" var="item">
 
                 <p:column headerText="Product" style="width: 25%">
                     <p:selectOneMenu value="#{item.productId}"
@@ -84,7 +84,7 @@
             <h:panelGroup id="totalPanel">
 
                 Total:
-                <h:outputText value="#{purchaseBean.entity.totalPrice}" />
+                <h:outputText value="#{purchaseBean.entity1.totalPrice}" />
 
             </h:panelGroup><br/>
             <p:commandButton value="Add" 

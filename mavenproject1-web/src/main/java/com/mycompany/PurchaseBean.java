@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import purchase.PurchaseDao;
+import purchase.PurchaseDetailEntity;
 import purchase.PurchaseEntity;
 
 @ManagedBean(name = "purchaseBean")
@@ -19,31 +20,34 @@ public class PurchaseBean {
     @EJB
     private PurchaseDao dao;
 
-    private PurchaseEntity entity = new PurchaseEntity();
-    List<PurchaseEntity> items = new ArrayList<>();
+    PurchaseEntity entity1 = new PurchaseEntity();
+    PurchaseDetailEntity entity2 = new PurchaseDetailEntity();
+
+    List<PurchaseDetailEntity> items2 = new ArrayList<>();
 
     @PostConstruct
     public void init() {
-        items.add(new PurchaseEntity()); // first row
+        items2.add(new PurchaseDetailEntity()); // first row
     }
 
     public void addRow() {
-        items.add(new PurchaseEntity());
+        items2.add(new PurchaseDetailEntity());
     }
 
-    public void removeRow(PurchaseEntity item) {
-        items.remove(item);
+    public void removeRow(PurchaseDetailEntity item) {
+        items2.remove(item);
     }
 
-    public List<PurchaseEntity> getItems() {
-        return items;
+    public List<PurchaseDetailEntity> getItems() {
+        return items2;
     }
 
+    //calculate Total price
     public void calculateTotal() {
 
         BigDecimal total = BigDecimal.ZERO;
 
-        for (PurchaseEntity item : items) {
+        for (PurchaseDetailEntity item : items2) {
 
             if (item.getCostPrice() != null && item.getStockQuantity() != null) {
 
@@ -54,17 +58,14 @@ public class PurchaseBean {
             }
         }
 
-        entity.setTotalPrice(total);
+        entity1.setTotalPrice(total);
     }
 
+    //saving 
     public void save() {
         try {
-            for (PurchaseEntity item : items) {
-                item.setSupplierId(entity.getSupplierId());
-                item.setDate(entity.getDate());
-                item.setTotalPrice(entity.getTotalPrice());
-                dao.save(item);
-            }
+
+            dao.save(entity1, items2);
 
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(
@@ -79,14 +80,6 @@ public class PurchaseBean {
         }
     }
 
-    public void del(PurchaseEntity entity) {
-        dao.remove(entity);
-    }
-
-    public List<PurchaseEntity> show() {
-        return dao.show();
-    }
-
     //getter and setter
     public PurchaseDao getDao() {
         return dao;
@@ -96,12 +89,28 @@ public class PurchaseBean {
         this.dao = dao;
     }
 
-    public PurchaseEntity getEntity() {
-        return entity;
+    public PurchaseEntity getEntity1() {
+        return entity1;
     }
 
-    public void setEntity(PurchaseEntity entity) {
-        this.entity = entity;
+    public void setEntity1(PurchaseEntity entity1) {
+        this.entity1 = entity1;
+    }
+
+    public PurchaseDetailEntity getEntity2() {
+        return entity2;
+    }
+
+    public void setEntity2(PurchaseDetailEntity entity2) {
+        this.entity2 = entity2;
+    }
+
+    public List<PurchaseDetailEntity> getItems2() {
+        return items2;
+    }
+
+    public void setItems2(List<PurchaseDetailEntity> items2) {
+        this.items2 = items2;
     }
 
 }
