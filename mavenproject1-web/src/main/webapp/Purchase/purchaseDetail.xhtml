@@ -16,9 +16,14 @@
                          paginator="true"
                          rows="10"
                          paginatorPosition="bottom"
-                        >
+                         selection="#{purchaseBean.selectedPurchase}"
+                         selectionMode="single" 
+                         rowKey="#{item.id}">
 
-                <p:column headerText="ID">
+
+                <p:ajax event="rowSelect"  listener="#{purchaseBean.onRowSelect}" 
+                        />
+                <p:column headerText="Purchase Id">
                     <h:outputText value="#{item.id}" />
                 </p:column>
 

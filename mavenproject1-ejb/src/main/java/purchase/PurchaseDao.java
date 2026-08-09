@@ -39,4 +39,13 @@ public class PurchaseDao {
         return em.createQuery(query, PurchaseEntity.class).getResultList();
     }
 
+    public List<PurchaseDetailEntity> getPurchaseDetails(Long id){
+        String query = "SELECT e FROM PurchaseDetailEntity e where e.purchaseId = :id";
+        return em.createQuery(query,PurchaseDetailEntity.class).setParameter("id", id).getResultList();
+    }
+    
+    
+   
 }
+
+

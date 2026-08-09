@@ -1,14 +1,16 @@
 package com.mycompany;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-    import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.SelectEvent;
 import purchase.PurchaseDao;
 import purchase.PurchaseDetailEntity;
 import purchase.PurchaseEntity;
@@ -19,15 +21,14 @@ public class PurchaseBean {
 
     @EJB
     private PurchaseDao dao;
-
     PurchaseEntity entity1 = new PurchaseEntity();
     PurchaseDetailEntity entity2 = new PurchaseDetailEntity();
-
+    private PurchaseEntity SelectedPurchase;
     List<PurchaseDetailEntity> items2 = new ArrayList<>();
 
     @PostConstruct
     public void init() {
-        items2.add(new PurchaseDetailEntity()); // first row
+        items2.add(new PurchaseDetailEntity());
     }
 
     public void addRow() {
@@ -79,7 +80,49 @@ public class PurchaseBean {
         }
     }
 
+    //redirecting to purchased product 
+    public void onRowSelect(SelectEvent<PurchaseEntity> event) {
+        PurchaseEntity selected = event.getObject();
+
+        try {
+            FacesContext.getCurrentInstance()
+                    .getExternalContext()
+                    .redirect("purchasedProductDisplay.xhtml?purchaseId=" + selected.getId());
+        } catch (IOException e) {
+        }
+    }
+
+    //get purhcaseid url
+    public Long getUrlId() {
+        Long urlId = Long.valueOf(
+                FacesContext.getCurrentInstance()
+                        .getExternalContext()
+                        .getRequestParameterMap()
+                        .get("purchaseId")
+        );
+        return urlId;
+    }
+
+    //get purchase details
+    public List<PurchaseDetailEntity> getPurchaseDetails() {
+        Long purchaseId = Long.valueOf(
+                FacesContext.getCurrentInstance()
+                        .getExternalContext()
+                        .getRequestParameterMap()
+                        .get("purchaseId")
+        );
+        return dao.getPurchaseDetails(purchaseId);
+    }
+
     //getter and setter
+    public PurchaseEntity getSelectedPurchase() {
+        return SelectedPurchase;
+    }
+
+    public void setSelectedPurchase(PurchaseEntity SelectedPurchase) {
+        this.SelectedPurchase = SelectedPurchase;
+    }
+
     public PurchaseDao getDao() {
         return dao;
     }
