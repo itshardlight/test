@@ -23,6 +23,7 @@ public class PurchaseDao {
     public void save(PurchaseEntity entity1, List<PurchaseDetailEntity> entity2) {
         em.persist(entity1);
         for (PurchaseDetailEntity item : entity2) {
+                    item.setPurchaseId(entity1.getId());
                     em.persist(item);
             }
     }
