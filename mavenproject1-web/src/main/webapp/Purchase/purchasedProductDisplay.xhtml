@@ -10,7 +10,11 @@
     <h:body>
         <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
         <h:form>
-            <h:outputText value="Selected Purchase ID: #{purchaseBean.urlId}" /><br/>
+            <h:outputText value="Purchase ID: #{purchaseBean.urlId}" /><br/>
+            <h:outputText value="Supplier: #{purchaseBean.supplierName}" /><br/>        
+            <h:outputText value="Total Amount: Rs #{purchaseBean.totalAmt}" /><br/>
+
+
 
             <p:dataTable id="dataTable"
                          value="#{purchaseBean.purchaseDetails}"

@@ -33,7 +33,7 @@ public class SupplierDao {
         em.merge(newEntity);
         em.getTransaction().commit();
     }
-//get supplier name
+    //get supplier name
     public String getSupplierName(Long supplierId) {
         String query = "SELECT e.sname FROM SupplierEntity e WHERE e.id = :id";
         return em.createQuery(query, String.class)

@@ -14,6 +14,7 @@ import org.primefaces.event.SelectEvent;
 import purchase.PurchaseDao;
 import purchase.PurchaseDetailEntity;
 import purchase.PurchaseEntity;
+import supplier.SupplierDao;
 
 @ManagedBean(name = "purchaseBean")
 @ViewScoped
@@ -21,6 +22,10 @@ public class PurchaseBean {
 
     @EJB
     private PurchaseDao dao;
+
+    @EJB
+    private SupplierDao supDao;
+    
     PurchaseEntity entity1 = new PurchaseEntity();
     PurchaseDetailEntity entity2 = new PurchaseDetailEntity();
     private PurchaseEntity SelectedPurchase;
@@ -105,13 +110,24 @@ public class PurchaseBean {
 
     //get purchase details
     public List<PurchaseDetailEntity> getPurchaseDetails() {
-        Long purchaseId = Long.valueOf(
-                FacesContext.getCurrentInstance()
-                        .getExternalContext()
-                        .getRequestParameterMap()
-                        .get("purchaseId")
-        );
+        Long purchaseId = getUrlId();
         return dao.getPurchaseDetails(purchaseId);
+    }
+
+    //get supplier name
+    public String getSupplierName() {
+        Long purhcaseId = getUrlId();
+        PurchaseEntity purhcaseBill = dao.getPurchaseBill(purhcaseId);
+        Long Supplierid = purhcaseBill.getSupplierId();
+        String supplierName = supDao.getSupplierName(Supplierid);
+        return supplierName;
+    }
+    
+      //get total amt
+    public BigDecimal getTotalAmt() {
+        Long purhcaseId = getUrlId();
+        PurchaseEntity purhcaseBill = dao.getPurchaseBill(purhcaseId);
+        return purhcaseBill.getTotalPrice();
     }
 
     //getter and setter
