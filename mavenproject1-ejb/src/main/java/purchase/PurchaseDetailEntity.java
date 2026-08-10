@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,9 +30,10 @@ public class PurchaseDetailEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "purchase_id")
-    private Long purchaseId;
-    
+    @ManyToOne
+    @JoinColumn(name = "purchase_id")
+    private PurchaseEntity purchase;
+
     @Column(name = "product_id", nullable = false)
     private Long productId;
 
@@ -46,19 +49,15 @@ public class PurchaseDetailEntity implements Serializable {
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
 
-    
     //getter and setter 
-
-    public Long getPurchaseId() {
-        return purchaseId;
+    public PurchaseEntity getPurchase() {
+        return purchase;
     }
 
-    public void setPurchaseId(Long purchaseId) {
-        this.purchaseId = purchaseId;
+    public void setPurchase(PurchaseEntity purchase) {
+        this.purchase = purchase;
     }
 
-    
-    
     public Long getId() {
         return id;
     }
@@ -98,6 +97,5 @@ public class PurchaseDetailEntity implements Serializable {
     public void setStockQuantity(Integer stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
-    
-    
+
 }

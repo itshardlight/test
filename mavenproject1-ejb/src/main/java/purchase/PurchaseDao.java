@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package purchase;
 
 import java.util.List;
@@ -10,10 +5,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author unish
- */
 @Stateless
 public class PurchaseDao {
 
@@ -21,31 +12,46 @@ public class PurchaseDao {
     private EntityManager em;
 
     public void save(PurchaseEntity entity1, List<PurchaseDetailEntity> entity2) {
+
         em.persist(entity1);
+
         for (PurchaseDetailEntity item : entity2) {
-            item.setPurchaseId(entity1.getId());
+            item.setPurchase(entity1);
             em.persist(item);
         }
     }
 
     public void remove(PurchaseEntity entity1, PurchaseDetailEntity entity2) {
-        em.remove(entity1);
-        em.remove(entity2);
 
+        em.remove(entity2);
+        em.remove(entity1);
     }
 
     public List<PurchaseEntity> showPurchase() {
+
         String query = "SELECT e FROM PurchaseEntity e";
-        return em.createQuery(query, PurchaseEntity.class).getResultList();
+
+        return em.createQuery(query, PurchaseEntity.class)
+                .getResultList();
     }
 
-    public List<PurchaseDetailEntity> getPurchaseDetails(Long id){
-        String query = "SELECT e FROM PurchaseDetailEntity e where e.purchaseId = :id";
-        return em.createQuery(query,PurchaseDetailEntity.class).setParameter("id", id).getResultList();
+    //get individual purhcaseEntity
+    public PurchaseEntity getPurchaseBill(Long purchaseId) {
+
+        String query = "SELECT e FROM PurchaseEntity e WHERE e.id = :id";
+
+        return em.createQuery(query, PurchaseEntity.class)
+                .setParameter("id", purchaseId)
+                .getSingleResult();
     }
-    
-    
-   
+
+    public List<PurchaseDetailEntity> getPurchaseDetails(Long id) {
+
+        String query = "SELECT e FROM PurchaseDetailEntity e WHERE e.purchase.id = :id";
+
+        return em.createQuery(query, PurchaseDetailEntity.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
 }
-
-

@@ -26,7 +26,7 @@ public class ProductDao {
 
     // delete product by id
     public void deletebyId(ProductEntity entity){
-        em.remove(entity);
+        em.remove(em.merge(entity));
     }
     
     // show all product
