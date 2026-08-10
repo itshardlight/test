@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition
+    template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <h:head>
-        <title>PrimeFaces Test</title>
-    </h:head>
+    <ui:define name="title">
+        Add Category
+    </ui:define>
 
-    <h:body>
+    <ui:define name="content">
+
+
         <p:growl id="growl" showDetail="true" />
         <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
         <h:form>
@@ -17,7 +21,6 @@
 
         </h:form>
 
-    </h:body>
+    </ui:define>
 
-</html>
-
+</ui:composition>
