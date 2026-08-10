@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>
+        <ui:insert name="title">My Application</ui:insert>
+    </title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0"/>
+</h:head>
+
+<h:body>
+
+    <!-- Header -->
+    <h:form>
+        <p:menubar>
+
+            <p:menuitem value="Home"
+                        outcome="/home"
+                        icon="pi pi-home"/>
+
+            <p:submenu label="Category"
+                       icon="pi pi-list">
+                <p:menuitem value="Category List"
+                            outcome="/Category/categoryDisplay"/>
+                <p:menuitem value="Add Category"
+                            outcome="/Category/categoryForm"/>
+            </p:submenu>
+
+            <p:submenu label="Product"
+                       icon="pi pi-box">
+                <p:menuitem value="Product List"
+                            outcome="/Product/productDisplay"/>
+                <p:menuitem value="Add Product"
+                            outcome="/Product/productForm"/>
+            </p:submenu>
+
+            <p:submenu label="Purchase"
+                       icon="pi pi-shopping-cart">
+                <p:menuitem value="Purchase List"
+                            outcome="/Purchase/purchaseDetail"/>
+                <p:menuitem value="New Purchase"
+                            outcome="/Purchase/purchaseForm"/>
+            </p:submenu>
+
+            <p:submenu label="Supplier"
+                       icon="pi pi-users">
+                <p:menuitem value="Supplier List"
+                            outcome="/Supplier/supplierDisplay"/>
+                <p:menuitem value="Add Supplier"
+                            outcome="/Supplier/supplierForm"/>
+            </p:submenu>
+
+            <p:menuitem value="Logout"
+                        outcome="/login"
+                        icon="pi pi-sign-out"/>
+
+        </p:menubar>
+    </h:form>
+
+
+    <!-- Page Content -->
+    <div style="padding: 20px;">
+
+        <ui:insert name="content">
+            Default Content
+        </ui:insert>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div style="text-align:center; padding:20px;">
+        <hr/>
+        <p>My Application © 2026</p>
+    </div>
+
+</h:body>
+
+</html>
