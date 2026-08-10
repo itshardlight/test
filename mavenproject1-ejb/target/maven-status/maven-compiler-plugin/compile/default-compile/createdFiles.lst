@@ -13,7 +13,6 @@ auth\UserService.class
 purchase\PurchaseEntity_.class
 category\CategoryEntity_.class
 category\CategoryEntity.class
-SalesEntity.class
 purchase\PurchaseDao.class
 auth\UserEntity_.class
 product\ProductEntity_.class
