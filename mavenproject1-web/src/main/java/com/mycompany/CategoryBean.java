@@ -28,6 +28,7 @@ public class CategoryBean {
                             "Success",
                             "Category saved successfully."
                     ));
+            entity = new CategoryEntity();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,

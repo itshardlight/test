@@ -28,14 +28,18 @@
 
 
                     <p:column headerText="Action">
-                        <p:commandButton value="Delete" action="#{categoryBean.remove(entity)}" update="@form"></p:commandButton>
+                        <p:commandButton value="Delete" action="#{categoryBean.remove(entity)}" update="@form">
+                        <p:confirm 
+                            header="Delete Category"
+                            message="Are you sure you want to delete #{entity.cname}?"
+                            icon="pi pi-exclamation-triangle"/></p:commandButton>
                     </p:column>
 
 
                 </p:dataTable>
             </div>
         </h:form>
-
+        <ui:include src="/WEB-INF/confirmDialog.xhtml"/>
     </ui:define>
 
 </ui:composition>

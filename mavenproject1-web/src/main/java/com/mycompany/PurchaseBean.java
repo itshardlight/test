@@ -78,6 +78,9 @@ public class PurchaseBean {
                             "Success",
                             "Product purchased successfully."
                     ));
+            entity1 = new PurchaseEntity();
+            items2 = new ArrayList<>();
+            addRow();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,

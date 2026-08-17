@@ -11,8 +11,8 @@
 
     <ui:define name="content">
 
-       
-<p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
+
+        <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
         <h:form>
             <div class="card">
                 <p:dataTable var="supplier" value="#{supplierBean.show()}">
@@ -25,17 +25,20 @@
                         <h:outputText value="#{supplier.sname}" />
                     </p:column>
 
-                   
+
 
                     <p:column headerText="Action">
-                        <p:commandButton value="Delete" action="#{supplierBean.remove(supplier)}" update="@form"></p:commandButton>
+                        <p:commandButton value="Delete" action="#{supplierBean.remove(supplier)}" update="@form">
+                            <p:confirm  header="Delete Supplier"
+                                        message="Are you sure you want to delete #{supplier.sname}?"
+                                        icon="pi pi-info-circle"/></p:commandButton>
                     </p:column>
 
 
                 </p:dataTable>
             </div>
         </h:form>
-
+        <ui:include src="/WEB-INF/confirmDialog.xhtml"/>
     </ui:define>
 
 </ui:composition>
