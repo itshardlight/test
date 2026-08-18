@@ -14,17 +14,17 @@ import javax.faces.context.FacesContext;
 import supplier.SupplierDao;
 import supplier.SupplierEntity;
 
-@ManagedBean(name="supplierBean")
+@ManagedBean(name = "supplierBean")
 @ViewScoped
 public class SupplierBean {
-    
+
     @EJB
     private SupplierDao dao;
-    
-    SupplierEntity entity =new SupplierEntity();
-    
-    public void add(){
-         try {
+
+    SupplierEntity entity = new SupplierEntity();
+
+    public void add() {
+        try {
             dao.add(entity);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(
@@ -32,28 +32,27 @@ public class SupplierBean {
                             "Success",
                             "Supplier saved successfully."
                     ));
+            entity = new SupplierEntity();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Error", e.getMessage()));
         }
     }
-    
-    public void remove(SupplierEntity entity){
+
+    public void remove(SupplierEntity entity) {
         dao.remove(entity);
     }
-    
-    public void update(SupplierEntity entity){
+
+    public void update(SupplierEntity entity) {
         dao.update(entity);
     }
-    
-    public List<SupplierEntity> show(){
+
+    public List<SupplierEntity> show() {
         return dao.show();
     }
-    
-    
-    //getter and setter
 
+    //getter and setter
     public SupplierDao getDao() {
         return dao;
     }
@@ -69,7 +68,5 @@ public class SupplierBean {
     public void setEntity(SupplierEntity entity) {
         this.entity = entity;
     }
-    
-    
-    
+
 }

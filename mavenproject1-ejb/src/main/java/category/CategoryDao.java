@@ -15,6 +15,7 @@ public class CategoryDao {
 
     public void save(CategoryEntity entity) {
         em.persist(entity);
+
     }
 
     public String getCategoryName(Long categoryId) {

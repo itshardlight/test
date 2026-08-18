@@ -27,6 +27,7 @@ public class ProductBean {
                             "Success",
                             "Product saved successfully."
                     ));
+            entity = new ProductEntity();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
