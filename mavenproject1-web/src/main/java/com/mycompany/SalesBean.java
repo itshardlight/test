@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import product.ProductDao;
 import sales.SalesDao;
 import sales.SalesDetailEntity;
 import sales.SalesEntity;
@@ -17,15 +16,14 @@ public class SalesBean {
     @EJB
     private SalesDao dao;
 
-    @EJB
-    private ProductDao dao2;
-
     SalesEntity entity1 = new SalesEntity();
     SalesDetailEntity entity2 = new SalesDetailEntity();
     List<SalesDetailEntity> item = new ArrayList<>();
-
+    Long ProductId;
+    
     public void productChanged() {
         item.add(entity2);
+        entity2 = new SalesDetailEntity();
     }
 
     //getter and setter

@@ -11,23 +11,17 @@ test\TestDao.class
 stock\StockDao.class
 product\ProductDao.class
 supplier\SupplierEntity_.class
-test\TestEntity_.class
 purchase\PurchaseDetailEntity_.class
 supplier\SupplierEntity.class
 sales\SalesEntity.class
 sales\SalesDetailEntity.class
 auth\UserEntity.class
-<<<<<<< HEAD
 sales\SalesEntity_.class
-=======
-test\TestEntity.class
->>>>>>> ba2b1af0c262eb4c415fe58b1d7a2e02e054ec40
 util\PasswordUtil.class
 category\CategoryDao.class
 supplier\SupplierDao.class
 auth\UserDao.class
 category\CategoryEntity_.class
-test\TestDao.class
 category\CategoryEntity.class
 purchase\PurchaseDao.class
 auth\UserEntity_.class

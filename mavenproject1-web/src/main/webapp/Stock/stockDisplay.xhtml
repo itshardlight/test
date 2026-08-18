@@ -8,26 +8,47 @@
     </h:head>
 
     <h:body>
-        <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
-        <h:form>
-            <h:form>
 
+        <p:commandButton value="Back"
+                         icon="pi pi-arrow-left"
+                         type="button"
+                         onclick="history.back();" />
 
-                <p:dataTable id="stockTable"
-                             value="#{stockBean.displayStock()}"
-                             var="stock">
+        <h:form id="form">
 
-                    <p:column headerText="Product ID">
-                        <h:outputText value="#{productBean.dao.findById(stock[0])}"/>
-                    </p:column>
+            <p:dataTable id="stockTable"
+                         value="#{stockBean.displayStock()}"
+                         var="stock"
+                         rowKey="#{stock[0]}"
+                         selectionMode="single"
+                         selection="#{stockBean.selectedStock}"
+                         paginator="true"
+                         rows="7"
+                         paginatorPosition="bottom">
 
-                    <p:column headerText="Current Stock">
-                        <h:outputText value="#{stock[1]}"/>
-                    </p:column>
+                <p:ajax event="rowSelect"
+                        listener="#{stockBean.onRowSelect}"
+                        process="@this" />
 
-                </p:dataTable>
+                <p:column headerText="Product ID"
+                           filterBy="#{productBean.dao.findById(stock[0])}"
+                          filterMatchMode="contains">
+                    
+                    <h:outputText value="#{stock[0]}" />
+                </p:column>
 
-            </h:form>
+                <p:column headerText="Name"
+                         >
+
+                    <h:outputText value="#{productBean.dao.findById(stock[0])}" />
+
+                </p:column>
+
+                <p:column headerText="Current Stock">
+                    <h:outputText value="#{stock[1]}" />
+                </p:column>
+
+            </p:dataTable>
 
         </h:form>
 
