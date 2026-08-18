@@ -1,9 +1,14 @@
 com\mycompany\TestBean.class
 com\mycompany\UserBean.class
+<<<<<<< HEAD
 com\mycompany\StockBean.class
 com\mycompany\SupplierBean.class
 com\mycompany\ProductBean.class
 com\mycompany\SalesBean.class
+=======
+com\mycompany\SupplierBean.class
+com\mycompany\ProductBean.class
+>>>>>>> ba2b1af0c262eb4c415fe58b1d7a2e02e054ec40
 util\JacksonConfig.class
 com\mycompany\CategoryBean.class
 com\mycompany\PurchaseBean.class
