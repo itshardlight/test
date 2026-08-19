@@ -16,43 +16,18 @@
                          type="button"
                          onclick="history.back();" />
 
-        <h:form id="form">
-
-            <p:dataTable id="stockTable"
-                         value="#{stockBean.displayStock()}"
-                         var="stock"
-                         rowKey="#{stock.productId}"
-                         selectionMode="single"
-                         selection="#{stockBean.selectedStock}"
-                         paginator="true"
-                         rows="7"
-                         paginatorPosition="bottom">
-
-                <p:ajax event="rowSelect"
-                        listener="#{stockBean.onRowSelect}"
-                        process="@this" />
-
-                <p:column headerText="Product ID"
-                          filterBy="#{stock.productId}"
-                          filterMatchMode="contains">
-
-                    <h:outputText value="#{stock.productId}" />
-
+        <h:form>
+            <p:dataTable id="dataTable"
+                         value="#{stockBean.showAll()}"
+                         var="row">
+                 <p:column headerText="Product">
+                     <h:outputText value="#{productBean.dao.findById(row[0])}" />
                 </p:column>
-
-                <p:column headerText="Name">
-
-                    <h:outputText
-                        value="#{productBean.dao.findById(stock.productId)}" />
-
+                
+                <p:column headerText="Quantity">
+                    <h:outputText value="#{row[1]}" />
                 </p:column>
-
-                <p:column headerText="Current Stock">
-
-                    <h:outputText value="#{stock.quantity}" />
-
-                </p:column>
-
+               
             </p:dataTable>
 
         </h:form>

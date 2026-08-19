@@ -30,4 +30,20 @@ public class StockDao {
 
     }
 
+    public List<StockEntity> displayStock(Long code) {
+        String query = "SELECT e FROM StockEntity e WHERE e.productId.id = :productId";
+        return em.createQuery(query, StockEntity.class).setParameter("productId", code).getResultList();
+    }
+
+    public List<Object[]> displayAllStock() {
+
+        String query
+                = "SELECT e.productId.id, SUM(e.Quantity) "
+                + "FROM StockEntity e "
+                + "GROUP BY e.productId";
+
+        return em.createQuery(query, Object[].class)
+                .getResultList();
+    }
+
 }

@@ -38,7 +38,6 @@ public class StockEntity implements Serializable {
     @Column(name = "cost_price", nullable = false)
     private BigDecimal costPrice;
 
-    @PositiveOrZero(message = "Stock cannot be negative")
     @Column(name = "quantity", nullable = false)
     private Integer Quantity;
 
