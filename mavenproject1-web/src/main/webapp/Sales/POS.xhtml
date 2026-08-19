@@ -8,36 +8,88 @@
     <h:head>
         <title>PrimeFaces Test</title>
     </h:head>
-
     <h:body>
+        <h:form id="form">
 
-        <h:form>
+            <p:selectOneMenu
+                id="product"
+                value="#{salesBean.selectedProduct}">
 
-            <p:selectOneMenu id="product"
-                             value="#{salesBean.productid}"
-                             filter="true"
-                             filterMatchMode="contains">
-
-                <f:selectItem itemLabel="Select Product"
-                              itemValue="#{null}"
-                              noSelectionOption="true" />
+                <f:selectItem
+                    itemLabel="-- Select Category --"
+                    itemValue="" />
 
                 <f:selectItems
-                    value="#{stockBean.displayStock()}"
+                    value="#{stockBean.showAll()}"
                     var="product"
                     itemLabel="#{product[0]} - #{productBean.dao.findById(product[0])}"
                     itemValue="#{product[0]}" />
 
-                <p:ajax event="change"
-                        listener="#{salesBean.onchange()}"
-                        update="" />
+                <p:ajax
+                    event="change"
+                    update="stockDialog dataTable"
+                    oncomplete="PF('stockDialog').show();" 
+                    />
 
             </p:selectOneMenu>
 
-     
+
+            <p:dialog
+                id="stockDialog"
+                widgetVar="stockDialog"
+                header="Stock Details"
+                modal="true"
+                width="700"
+                resizable="false">
+
+                <p:dataTable
+                    id="dataTable"
+                    value="#{stockBean.show(salesBean.selectedProduct)}"
+                    var="row"
+                    selection="#{salesBean.selectedItems()}"
+                    selectionMode="single" 
+                    rowKey="#{row.id}"
+                    >
+
+                    <p:ajax event="rowSelect" 
+                            update="form:product"
+                            listener="#{salesBean.onRowSelect}" 
+                            oncomplete="PF('stockDialog').hide();"
+                            />
+                    <p:column headerText="ID">
+                        <h:outputText value="#{productBean.dao.findById(salesBean.selectedProduct)}" />
+                    </p:column>
+
+                    <p:column headerText="Cost Price">
+                        <h:outputText value="#{row.costPrice}" />
+                    </p:column>
+
+                    <p:column headerText="Selling Price">
+                        <h:outputText value="#{row.sellingPrice}" />
+                    </p:column>
+
+                    <p:column headerText="Stock Remaining">
+                        <h:outputText value="#{row.quantity}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:dialog>
+
+
 
         </h:form>
 
+        <h:form>
+            <p:dataTable id="dataTable"
+                         value="#{bean.items}"
+                         var="row">
+                <p:column headerText="ID">
+                    <h:outputText value="#{row.id}" />
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
     </h:body>
 
 </html>

@@ -18,39 +18,23 @@
 
         <h:form>
 
-            <p:dataTable id="stockTable2"
-                         value="#{stockBean.displayDetailStock(stockBean.urlId)}"
-                         var="stock"
-                         paginator="true"
-                         rows="7"
-                         paginatorPosition="bottom">
-
-                <p:column headerText="Product Name">
-
-                    <h:outputText
-                        value="#{productBean.dao.findById(stock.productId)}" />
-
+            <p:dataTable id="dataTable"
+                         value="#{stockBean.show(stockBean.urlId)}"
+                         var="row">
+                <p:column headerText="ID">
+                    <h:outputText value="#{productBean.dao.findById(stockBean.urlId)}" />
                 </p:column>
-
-                <p:column headerText="CP">
-
-                    <h:outputText value="#{stock.costPrice}" />
-
+                <p:column headerText="Cost Price">
+                    <h:outputText value="#{row.costPrice}" />
                 </p:column>
-
-                <p:column headerText="SP">
-
-                    <h:outputText value="#{stock.sellingPrice}" />
-
+                <p:column headerText="Selling Price">
+                    <h:outputText value="#{row.sellingPrice}" />
                 </p:column>
-
-                <p:column headerText="Current Stock">
-
-                    <h:outputText value="#{stock.quantity}" />
-
+                <p:column headerText="Stock Remaining">
+                    <h:outputText value="#{row.quantity}" />
                 </p:column>
-
             </p:dataTable>
+
 
         </h:form>
 

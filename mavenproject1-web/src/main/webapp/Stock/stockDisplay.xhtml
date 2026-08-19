@@ -19,15 +19,23 @@
         <h:form>
             <p:dataTable id="dataTable"
                          value="#{stockBean.showAll()}"
-                         var="row">
-                 <p:column headerText="Product">
-                     <h:outputText value="#{productBean.dao.findById(row[0])}" />
+                         var="row"
+                         rowKey="#{row[0]}" 
+                         selectionMode="single" 
+                         selection="#{stockBean.selectedProduct}"
+                         >
+                <p:ajax event="rowSelect"
+                        listener="#{stockBean.onRowSelect}" />
+
+
+                <p:column headerText="Product">
+                    <h:outputText value="#{productBean.dao.findById(row[0])}" />
                 </p:column>
-                
+
                 <p:column headerText="Quantity">
                     <h:outputText value="#{row[1]}" />
                 </p:column>
-               
+
             </p:dataTable>
 
         </h:form>
