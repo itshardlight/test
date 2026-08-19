@@ -11,10 +11,10 @@
 
     <h:body>
 
-        <h:form id="salesForm">
+        <h:form>
 
             <p:selectOneMenu id="product"
-                             value="#{salesBean.entity2.productId}"
+                             value="#{salesBean.productid}"
                              filter="true"
                              filterMatchMode="contains">
 
@@ -22,31 +22,19 @@
                               itemValue="#{null}"
                               noSelectionOption="true" />
 
-                <f:selectItems value="#{productBean.show()}"
-                               var="product"
-                               itemLabel="#{product.id} - #{product.productName}"
-                               itemValue="#{product.id}" />
+                <f:selectItems
+                    value="#{stockBean.displayStock()}"
+                    var="product"
+                    itemLabel="#{product[0]} - #{productBean.dao.findById(product[0])}"
+                    itemValue="#{product[0]}" />
 
                 <p:ajax event="change"
-                        listener="#{salesBean.productChanged}"
-                        update="productTable product" />
+                        listener="#{salesBean.onchange()}"
+                        update="" />
 
             </p:selectOneMenu>
 
-            <p:dataTable id="productTable"
-                         value="#{salesBean.item}"
-                         var="product"
-                         style="margin-top:20px">
-
-                <p:column headerText="Product Name">
-                    <h:outputText value="#{product.id}" />
-                </p:column>
-                
-                 <p:column headerText="Selling Price">
-                     <h:outputText value="#{product.sellingPrice}" />
-                </p:column>
-
-            </p:dataTable>
+     
 
         </h:form>
 

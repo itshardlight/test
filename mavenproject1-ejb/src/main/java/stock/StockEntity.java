@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package sales;
+package stock;
 
 import jakarta.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
@@ -23,17 +18,13 @@ import product.ProductEntity;
  * @author unish
  */
 @Entity
-@Table(name="salesDetail_table")
-public class SalesDetailEntity implements Serializable {
+@Table(name="stock_entity")
+public class StockEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "sales_id")
-    private SalesEntity sales;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -42,34 +33,22 @@ public class SalesDetailEntity implements Serializable {
     @PositiveOrZero(message = "Selling Price cannot be negative")
     @Column(name = "selling_price", nullable = false)
     private BigDecimal sellingPrice;
-    
+
     @PositiveOrZero(message = "Cost Price cannot be negative")
     @Column(name = "cost_price", nullable = false)
     private BigDecimal costPrice;
 
     @PositiveOrZero(message = "Stock cannot be negative")
-    @Column(name = "sold_quantity", nullable = false)
-    private Integer soldQuantity;
+    @Column(name = "quantity", nullable = false)
+    private Integer Quantity;
 
-    
-    
-    
     //getter and setter 
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public SalesEntity getSales() {
-        return sales;
-    }
-
-    public void setSales(SalesEntity sales) {
-        this.sales = sales;
     }
 
     public ProductEntity getProductId() {
@@ -88,14 +67,20 @@ public class SalesDetailEntity implements Serializable {
         this.sellingPrice = sellingPrice;
     }
 
-    public Integer getSoldQuantity() {
-        return soldQuantity;
+    public BigDecimal getCostPrice() {
+        return costPrice;
     }
 
-    public void setSoldQuantity(Integer soldQuantity) {
-        this.soldQuantity = soldQuantity;
+    public void setCostPrice(BigDecimal costPrice) {
+        this.costPrice = costPrice;
     }
 
-   
-    
+    public Integer getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(Integer Quantity) {
+        this.Quantity = Quantity;
+    }
+
 }

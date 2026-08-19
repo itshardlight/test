@@ -11,9 +11,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
+import product.ProductDao;
 import purchase.PurchaseDao;
 import purchase.PurchaseDetailEntity;
 import purchase.PurchaseEntity;
+import stock.StockDao;
+import stock.StockEntity;
 import supplier.SupplierDao;
 
 @ManagedBean(name = "purchaseBean")
@@ -24,8 +27,14 @@ public class PurchaseBean {
     private PurchaseDao dao;
 
     @EJB
+    private StockDao stockDao;
+
+    @EJB
     private SupplierDao supDao;
-    
+
+    @EJB
+    private ProductDao proDao;
+
     PurchaseEntity entity1 = new PurchaseEntity();
     PurchaseDetailEntity entity2 = new PurchaseDetailEntity();
     private PurchaseEntity SelectedPurchase;
@@ -67,9 +76,23 @@ public class PurchaseBean {
         entity1.setTotalPrice(total);
     }
 
+    public void saveStock(List<PurchaseDetailEntity> entity) {
+        for (PurchaseDetailEntity item : entity) {
+            StockEntity stockEntity = new StockEntity();
+            stockEntity.setProductId(proDao.entitybyId(item.getProductId()));
+            stockEntity.setQuantity(item.getStockQuantity());
+            stockEntity.setCostPrice(item.getCostPrice());
+            stockEntity.setSellingPrice(item.getSellingPrice());
+            stockDao.save(stockEntity);
+
+        }
+
+    }
+
     //saving 
     public void save() {
         try {
+            saveStock(items2);
             dao.save(entity1, items2);
 
             FacesContext.getCurrentInstance().addMessage(null,
@@ -125,8 +148,8 @@ public class PurchaseBean {
         String supplierName = supDao.getSupplierName(Supplierid);
         return supplierName;
     }
-    
-      //get total amt
+
+    //get total amt
     public BigDecimal getTotalAmt() {
         Long purhcaseId = getUrlId();
         PurchaseEntity purhcaseBill = dao.getPurchaseBill(purhcaseId);

@@ -1,45 +1,59 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition
+    template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <h:head>
-        <title>PrimeFaces Test</title>
-    </h:head>
+    <ui:define name="title">
+        Stock Detail
+    </ui:define>
 
-    <h:body>
+    <ui:define name="content">
 
         <p:commandButton value="Back"
                          icon="pi pi-arrow-left"
                          type="button"
                          onclick="history.back();" />
 
-        <p:dataTable id="stockTable2"
-                     value="#{stockBean.displayDetailStock(stockBean.urlId)}"
-                     var="stock"
-                     paginator="true"
-                     rows="7"
-                     paginatorPosition="bottom"
-                     >
+        <h:form>
 
-            <p:column headerText="Product Name">
-                <h:outputText value="#{productBean.dao.findById(stock[0])}" />
-            </p:column>
+            <p:dataTable id="stockTable2"
+                         value="#{stockBean.displayDetailStock(stockBean.urlId)}"
+                         var="stock"
+                         paginator="true"
+                         rows="7"
+                         paginatorPosition="bottom">
 
-            <p:column headerText="CP">
-                <h:outputText value="#{stock[1]}" />
-            </p:column>
+                <p:column headerText="Product Name">
 
-            <p:column headerText="SP">
-                <h:outputText value="#{stock[2]}" />
-            </p:column>
+                    <h:outputText
+                        value="#{productBean.dao.findById(stock.productId)}" />
 
-            <p:column headerText="Current Stock">
-                <h:outputText value="#{stock[3]}" />
-            </p:column>
+                </p:column>
 
-        </p:dataTable>
+                <p:column headerText="CP">
 
-    </h:body>
+                    <h:outputText value="#{stock.costPrice}" />
 
-</html>
+                </p:column>
+
+                <p:column headerText="SP">
+
+                    <h:outputText value="#{stock.sellingPrice}" />
+
+                </p:column>
+
+                <p:column headerText="Current Stock">
+
+                    <h:outputText value="#{stock.quantity}" />
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

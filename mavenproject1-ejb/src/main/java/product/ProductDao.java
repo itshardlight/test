@@ -16,6 +16,11 @@ public class ProductDao {
         em.persist(entity);
     }
 
+    public ProductEntity entitybyId(Long code){
+        String query = "SELECT a FROM ProductEntity a WHERE a.id = :id";
+        return em.createQuery(query,ProductEntity.class).setParameter("id", code).getSingleResult();
+    }
+    
     public String findById(Long code) {
     String query = "SELECT a.productName FROM ProductEntity a WHERE a.id = :id";
 

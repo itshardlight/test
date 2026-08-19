@@ -1,9 +1,7 @@
 com\mycompany\TestBean.class
 com\mycompany\UserBean.class
-com\mycompany\StockBean.class
 com\mycompany\SupplierBean.class
 com\mycompany\ProductBean.class
-com\mycompany\SalesBean.class
 util\JacksonConfig.class
 com\mycompany\CategoryBean.class
 com\mycompany\PurchaseBean.class

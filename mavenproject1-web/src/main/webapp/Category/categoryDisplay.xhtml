@@ -15,9 +15,14 @@
         <p:commandButton value="Back" icon="pi pi-arrow-left" type="button" onclick="history.back();" />
         <h:form>
             <div class="card">
-                <p:dataTable var="entity" value="#{categoryBean.show()}">
+                <p:dataTable var="entity" value="#{categoryBean.show()}"
+                             paginator="true"
+                             rows="7"
+                             paginatorPosition="bottom">
 
-                    <p:column headerText="Category Code">
+                    <p:column headerText="Category Code" 
+                              filterBy="#{entity.cname}" 
+                          filterMatchMode="contains">
                         <h:outputText value="#{entity.id}"/>
                     </p:column>
 
@@ -29,10 +34,10 @@
 
                     <p:column headerText="Action">
                         <p:commandButton value="Delete" action="#{categoryBean.remove(entity)}" update="@form">
-                        <p:confirm 
-                            header="Delete Category"
-                            message="Are you sure you want to delete #{entity.cname}?"
-                            icon="pi pi-exclamation-triangle"/></p:commandButton>
+                            <p:confirm 
+                                header="Delete Category"
+                                message="Are you sure you want to delete #{entity.cname}?"
+                                icon="pi pi-exclamation-triangle"/></p:commandButton>
                     </p:column>
 
 

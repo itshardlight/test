@@ -16,6 +16,7 @@ public class PurchaseDao {
         em.persist(entity1);
 
         for (PurchaseDetailEntity item : entity2) {
+            
             item.setPurchase(entity1);
             em.persist(item);
         }

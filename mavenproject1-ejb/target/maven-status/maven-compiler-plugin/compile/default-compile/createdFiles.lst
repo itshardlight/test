@@ -26,3 +26,5 @@ category\CategoryEntity.class
 purchase\PurchaseDao.class
 auth\UserEntity_.class
 product\ProductEntity_.class
+stock\StockEntity_.class
+stock\StockEntity.class

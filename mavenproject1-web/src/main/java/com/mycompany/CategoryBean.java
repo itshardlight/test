@@ -43,6 +43,7 @@ public class CategoryBean {
         return dao.show();
     }
     
+    
     public void remove(CategoryEntity entity){
         dao.remove(entity);
     }

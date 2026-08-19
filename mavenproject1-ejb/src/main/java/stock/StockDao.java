@@ -2,6 +2,8 @@ package stock;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -11,36 +13,21 @@ public class StockDao {
     @PersistenceContext
     private EntityManager em;
 
-    public List<Object[]> displayStock() {
+    public void save(StockEntity entity) {
+        try {
+            em.persist(entity);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_INFO,
+                            "Success",
+                            "Product saved successfully in stock database."
+                    ));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error", e.getMessage()));
+        }
 
-        String query
-                = "SELECT p.productId, "
-                + "       SUM(p.stockQuantity) - "
-                + "       COALESCE("
-                + "           (SELECT SUM(s.soldQuantity) "
-                + "            FROM SalesDetailEntity s "
-                + "            WHERE s.productId.id = p.productId.id), "
-                + "           0"
-                + "       ) "
-                + "FROM PurchaseDetailEntity p "
-                + "GROUP BY p.productId";
-
-        return em.createQuery(query).getResultList();
     }
 
-    public List<Object[]> displayDetailStock(Long productId) {
-        String query
-                = "SELECT p.productId, "
-                + "       p.costPrice, "
-                + "       p.sellingPrice, "
-                + "       SUM(p.stockQuantity) "
-                + "FROM PurchaseDetailEntity p "
-                + "WHERE p.productId = :productId "
-                + "GROUP BY p.productId, p.costPrice, p.sellingPrice "
-                + "HAVING SUM(p.stockQuantity) > 0";
-
-        return em.createQuery(query)
-                .setParameter("productId", productId)
-                .getResultList();
-    }
 }
