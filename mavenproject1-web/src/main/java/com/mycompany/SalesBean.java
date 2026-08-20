@@ -39,6 +39,20 @@ public class SalesBean {
     private SalesDetailEntity entity2 = new SalesDetailEntity();
     private List<SalesDetailEntity> cart = new ArrayList<>();
 
+    public void removeFromCart(SalesDetailEntity item) {
+        if (item != null) {
+            cart.remove(item);
+
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_FATAL,
+                            "Removed",
+                            item.getProductId().getProductName() + " removed from cart."
+                    ));
+        }
+    }
+  
+
     public void onRowSelect(SelectEvent<StockDto> event) {
 
         // Get EXACTLY the row that was clicked
@@ -97,7 +111,7 @@ public class SalesBean {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(
                                 FacesMessage.SEVERITY_INFO,
-                                "Cart Updated", 
+                                "Cart Updated",
                                 "Quantity increased to "
                                 + existingItem.getSoldQuantity()
                         ));
@@ -152,6 +166,25 @@ public class SalesBean {
     }
 
     //getter and setter 
+    
+    
+    
+    public StockDao getStodao() {
+        return stodao;
+    }
+
+    public void setStodao(StockDao stodao) {
+        this.stodao = stodao;
+    }
+
+    public ProductDao getProdao() {
+        return prodao;
+    }
+
+    public void setProdao(ProductDao prodao) {
+        this.prodao = prodao;
+    }
+
     public Long getSelectedProduct() {
         return selectedProduct;
     }
