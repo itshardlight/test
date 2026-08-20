@@ -52,7 +52,7 @@
                     >
 
                     <p:ajax event="rowSelect" 
-                            update="form:product"
+                            update="form:product cartForm:cartTable"
                             listener="#{salesBean.onRowSelect}" 
                             oncomplete="PF('stockDialog').hide();"
                             />
@@ -80,12 +80,12 @@
 
         </h:form>
 
-        <h:form>
-            <p:dataTable id="dataTable"
-                         value="#{bean.items}"
+        <h:form id="cartForm">
+            <p:dataTable id="cartTable"
+                         value="#{salesBean.cart}"
                          var="row">
                 <p:column headerText="ID">
-                    <h:outputText value="#{row.id}" />
+                    <h:outputText value="#{row.sellingPrice}" />
                 </p:column>
             </p:dataTable>
 

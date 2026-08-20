@@ -30,6 +30,20 @@ public class StockDao {
 
     }
 
+    public StockDto getStock(Long code){
+          String query = "SELECT new stock.StockDto("
+                + "e.productId.id, e.costPrice, e.sellingPrice, SUM(e.Quantity))  "
+                + "FROM StockEntity e "
+                + "WHERE e.productId.id = :productId "
+                + "GROUP BY e.costPrice, e.sellingPrice";
+
+        return em.createQuery(query, StockDto.class)
+                .setParameter("productId", code)
+                .getSingleResult();
+        
+    }
+    
+    
     public List<StockDto> displayStock(Long code) {
         String query = "SELECT new stock.StockDto("
                 + "e.productId.id, e.costPrice, e.sellingPrice, SUM(e.Quantity))  "

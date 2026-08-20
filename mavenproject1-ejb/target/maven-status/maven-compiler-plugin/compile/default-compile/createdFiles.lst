@@ -7,6 +7,7 @@ test\TestEntity.class
 sales\SalesDetailEntity_.class
 auth\UserService.class
 purchase\PurchaseEntity_.class
+stock\StockDto.class
 test\TestDao.class
 stock\StockDao.class
 product\ProductDao.class

@@ -12,8 +12,8 @@ public class SalesDao {
     @PersistenceContext
     private EntityManager em;
     
-    private Long selectedProduct;
 
+    
     public EntityManager getEm() {
         return em;
     }
@@ -22,13 +22,7 @@ public class SalesDao {
         this.em = em;
     }
 
-    public Long getSelectedProduct() {
-        return selectedProduct;
-    }
-
-    public void setSelectedProduct(Long selectedProduct) {
-        this.selectedProduct = selectedProduct;
-    }
+      
    
     
 }

@@ -7,7 +7,6 @@ package com.mycompany;
 
 import java.io.IOException;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,7 +14,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import stock.StockDao;
 import stock.StockDto;
-import stock.StockEntity;
 
 @ManagedBean(name = "stockBean")
 @ViewScoped
