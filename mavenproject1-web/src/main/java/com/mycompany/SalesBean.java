@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import product.ProductDao;
 import sales.SalesDao;
 import sales.SalesDetailEntity;
 import sales.SalesEntity;
@@ -26,6 +27,9 @@ public class SalesBean {
     @EJB
     private StockDao stodao;
 
+    @EJB
+    private ProductDao prodao;
+    
     private Long selectedProduct;
 
     private SalesEntity entity1 = new SalesEntity();
@@ -33,11 +37,14 @@ public class SalesBean {
     private List<SalesDetailEntity> cart = new ArrayList<>();
 
     public void onRowSelect() {
-
         StockDto selectedCart = stodao.getStock(selectedProduct);
-        entity2.setSellingPrice(selectedCart.getCostPrice());
+
+        SalesDetailEntity newItem = new SalesDetailEntity();
+        newItem.setSellingPrice(selectedCart.getSellingPrice());
+        newItem.setProductId(prodao.entitybyId(selectedCart.getProductId()));
+        newItem.setSoldQuantity(1);
+        cart.add(newItem);
         selectedProduct = null;
-        cart.add(entity2);
     }
 
     public void selectedItems() {

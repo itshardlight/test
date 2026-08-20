@@ -46,7 +46,6 @@
                     id="dataTable"
                     value="#{stockBean.show(salesBean.selectedProduct)}"
                     var="row"
-                    selection="#{salesBean.selectedItems()}"
                     selectionMode="single" 
                     rowKey="#{row.id}"
                     >
@@ -83,9 +82,15 @@
         <h:form id="cartForm">
             <p:dataTable id="cartTable"
                          value="#{salesBean.cart}"
-                         var="row">
-                <p:column headerText="ID">
-                    <h:outputText value="#{row.sellingPrice}" />
+                         var="row2">
+                  <p:column headerText="Product">
+                      <h:outputText value="#{row2.productId.productName}" />
+                </p:column>
+                <p:column headerText="Selling Price">
+                    <h:outputText value="#{row2.sellingPrice}" />
+                </p:column>
+                 <p:column headerText="Quantity">
+                     <h:outputText value="#{row2.soldQuantity}" />
                 </p:column>
             </p:dataTable>
 
