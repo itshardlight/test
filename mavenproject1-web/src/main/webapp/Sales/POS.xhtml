@@ -10,7 +10,7 @@
     </h:head>
     <h:body>
         <h:form id="form">
-
+            <p:growl id="growl" showDetail="true" />
             <p:selectOneMenu
                 id="product"
                 value="#{salesBean.selectedProduct}">
@@ -51,11 +51,14 @@
                     >
 
                     <p:ajax event="rowSelect" 
-                            update="form:product cartForm:cartTable"
+                            update="form:product cartForm:cartTable form:growl"
                             listener="#{salesBean.onRowSelect}" 
                             oncomplete="PF('stockDialog').hide();"
                             />
                     <p:column headerText="ID">
+                        <h:outputText value="#{row.id}" />
+                    </p:column>
+                    <p:column headerText="ProductName">
                         <h:outputText value="#{productBean.dao.findById(salesBean.selectedProduct)}" />
                     </p:column>
 
@@ -83,14 +86,14 @@
             <p:dataTable id="cartTable"
                          value="#{salesBean.cart}"
                          var="row2">
-                  <p:column headerText="Product">
-                      <h:outputText value="#{row2.productId.productName}" />
+                <p:column headerText="Product">
+                    <h:outputText value="#{row2.productId.productName}" />
                 </p:column>
                 <p:column headerText="Selling Price">
                     <h:outputText value="#{row2.sellingPrice}" />
                 </p:column>
-                 <p:column headerText="Quantity">
-                     <h:outputText value="#{row2.soldQuantity}" />
+                <p:column headerText="Quantity">
+                    <h:outputText value="#{row2.soldQuantity}" />
                 </p:column>
             </p:dataTable>
 

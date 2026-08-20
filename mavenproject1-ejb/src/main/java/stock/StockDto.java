@@ -16,8 +16,9 @@ public class StockDto implements Serializable {
     }
 
     // Constructor for JPQL "SELECT new stock.StockDto(...)" — matches the aggregated query
-    public StockDto(Long productId, BigDecimal costPrice,
+    public StockDto(Long id,Long productId, BigDecimal costPrice,
             BigDecimal sellingPrice, Long Quantity) {
+        this.id = id;
         this.productId = productId;
         this.costPrice = costPrice;
         this.sellingPrice = sellingPrice;

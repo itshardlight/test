@@ -8,8 +8,11 @@ package com.mycompany;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.SelectEvent;
 import product.ProductDao;
 import sales.SalesDao;
 import sales.SalesDetailEntity;
@@ -29,21 +32,118 @@ public class SalesBean {
 
     @EJB
     private ProductDao prodao;
-    
+
     private Long selectedProduct;
 
     private SalesEntity entity1 = new SalesEntity();
     private SalesDetailEntity entity2 = new SalesDetailEntity();
     private List<SalesDetailEntity> cart = new ArrayList<>();
 
-    public void onRowSelect() {
-        StockDto selectedCart = stodao.getStock(selectedProduct);
+    public void onRowSelect(SelectEvent<StockDto> event) {
 
-        SalesDetailEntity newItem = new SalesDetailEntity();
-        newItem.setSellingPrice(selectedCart.getSellingPrice());
-        newItem.setProductId(prodao.entitybyId(selectedCart.getProductId()));
-        newItem.setSoldQuantity(1);
-        cart.add(newItem);
+        // Get EXACTLY the row that was clicked
+        StockDto selectedStock = event.getObject();
+
+        if (selectedStock == null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_WARN,
+                            "No Selection",
+                            "No stock selected!"
+                    ));
+            return;
+        }
+
+        // Check available stock
+        if (selectedStock.getQuantity() <= 0) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_WARN,
+                            "Out of Stock",
+                            "Product is out of stock!"
+                    ));
+            return;
+        }
+
+        SalesDetailEntity existingItem = null;
+
+        // Check if SAME product + SAME selling price + SAME cost price
+        // already exists in cart
+        for (SalesDetailEntity item : cart) {
+
+            if (item.getProductId() != null
+                    && item.getProductId().getId().equals(selectedStock.getProductId())
+                    && item.getSellingPrice() != null
+                    && selectedStock.getSellingPrice() != null
+                    && item.getSellingPrice().compareTo(selectedStock.getSellingPrice()) == 0
+                    && item.getCostPrice() != null
+                    && selectedStock.getCostPrice() != null
+                    && item.getCostPrice().compareTo(selectedStock.getCostPrice()) == 0) {
+
+                existingItem = item;
+                break;
+            }
+        }
+
+        if (existingItem != null) {
+
+            // Don't allow quantity to exceed stock
+            if (existingItem.getSoldQuantity() < selectedStock.getQuantity()) {
+
+                existingItem.setSoldQuantity(
+                        existingItem.getSoldQuantity() + 1
+                );
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,
+                                "Cart Updated", 
+                                "Quantity increased to "
+                                + existingItem.getSoldQuantity()
+                        ));
+
+            } else {
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(
+                                FacesMessage.SEVERITY_WARN,
+                                "Stock Limit",
+                                "Cannot add more. Stock quantity is only "
+                                + selectedStock.getQuantity()
+                        ));
+            }
+
+        } else {
+
+            // Create a NEW cart item using the CLICKED ROW
+            SalesDetailEntity newItem = new SalesDetailEntity();
+
+            newItem.setProductId(
+                    prodao.entitybyId(selectedStock.getProductId())
+            );
+
+            // Take prices from selectedStock
+            newItem.setSellingPrice(
+                    selectedStock.getSellingPrice()
+            );
+
+            newItem.setCostPrice(
+                    selectedStock.getCostPrice()
+            );
+
+            newItem.setSoldQuantity(1);
+
+            cart.add(newItem);
+
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_INFO,
+                            "Added to Cart",
+                            newItem.getProductId().getProductName() + " added successfully."
+                    ));
+        }
+
+        // Clear selection AFTER processing the clicked row
         selectedProduct = null;
     }
 

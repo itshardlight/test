@@ -46,7 +46,7 @@ public class StockDao {
     
     public List<StockDto> displayStock(Long code) {
         String query = "SELECT new stock.StockDto("
-                + "e.productId.id, e.costPrice, e.sellingPrice, SUM(e.Quantity))  "
+                + "e.id, e.productId.id, e.costPrice, e.sellingPrice, SUM(e.Quantity))  "
                 + "FROM StockEntity e "
                 + "WHERE e.productId.id = :productId "
                 + "GROUP BY e.costPrice, e.sellingPrice";
